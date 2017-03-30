@@ -254,3 +254,5 @@ clean :
 	-$(Q)rm -rf $(ALLOBJS)
 	-$(Q)rm -rf $(ALLDEPS)
 	-$(Q)rm -rf $(APPL_FULL_NAME).elf $(APPL_FULL_NAME).map openocd.log
+
+-include $(ALLDEPS)

@@ -83,6 +83,10 @@
 volatile unsigned int ulCriticalNesting = 999UL;
 volatile unsigned int context_switch_reqflg;	/* task context switch request flag in exceptions and interrupts handling */
 
+#ifndef BOARD_OS_TIMER_ID
+#define BOARD_OS_TIMER_ID   BOARD_SYS_TIMER_ID
+#endif
+
 /* --------------------------------------------------------------------------*/
 /**
  * @brief kernel tick interrupt handler of freertos
@@ -91,7 +95,7 @@ volatile unsigned int context_switch_reqflg;	/* task context switch request flag
 static void vKernelTick( void *ptr )
 {
 	/* clear timer interrupt */
-	timer_int_clear(BOARD_SYS_TIMER_ID);
+	timer_int_clear(BOARD_OS_TIMER_ID);
 	board_timer_update(configTICK_RATE_HZ);
 
 	if (xTaskIncrementTick()) {
@@ -108,12 +112,12 @@ static void prvSetupTimerInterrupt(void)
 {
 	unsigned int cyc = configCPU_CLOCK_HZ / configTICK_RATE_HZ;
 
-	int_disable(BOARD_SYS_TIMER_ID); /* disable os timer interrupt */
-	timer_stop(BOARD_SYS_TIMER_ID);
-	timer_start(BOARD_SYS_TIMER_ID, TIMER_CTRL_IE | TIMER_CTRL_NH, cyc);
+	int_disable(BOARD_OS_TIMER_ID); /* disable os timer interrupt */
+	timer_stop(BOARD_OS_TIMER_ID);
+	timer_start(BOARD_OS_TIMER_ID, TIMER_CTRL_IE | TIMER_CTRL_NH, cyc);
 
-	int_handler_install(BOARD_SYS_TIMER_ID, (INT_HANDLER)vKernelTick);
-	int_enable(BOARD_SYS_TIMER_ID);
+	int_handler_install(BOARD_OS_TIMER_ID, (INT_HANDLER)vKernelTick);
+	int_enable(BOARD_OS_TIMER_ID);
 }
 
 /*

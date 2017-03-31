@@ -104,6 +104,7 @@ OPENOCD_SCRIPT_ROOT = C:/arc_gnu/share/openocd/scripts
 COMPILE_OPT_ARGFILE = $(ARC_CORE_CONFIG_DIR)/gcc.arg
 APP_LINK_FILE = $(ARC_CORE_CONFIG_DIR)/arc_core.ld
 OPENOCD_CFG_FILE = $(OPENOCD_SCRIPT_ROOT)/board/snps_em_sk_v2.2.cfg
+OPENOCD_OPTIONS  = -s $(OPENOCD_SCRIPT_ROOT) -f $(OPENOCD_CFG_FILE)
 
 ###
 # embARC EMSK BSP source directories configuration
@@ -141,8 +142,7 @@ FREERTOS_KERNEL_CSRCS = $(FREERTOS_KERNEL_ROOT)/croutine.c \
 		$(FREERTOS_KERNEL_ROOT)/timers.c \
 		$(FREERTOS_KERNEL_ROOT)/portable/MemMang/heap_2.c \
 		$(FREERTOS_KERNEL_ROOT)/portable/Synopsys/ARC/port.c \
-		$(FREERTOS_KERNEL_ROOT)/portable/Synopsys/ARC/freertos_tls.c \
-		$(FREERTOS_KERNEL_ROOT)/portable/Synopsys/ARC/arc_freertos_exceptions.c
+		$(FREERTOS_KERNEL_ROOT)/portable/Synopsys/ARC/freertos_tls.c
 
 FREERTOS_KERNEL_ASMSRCS = $(FREERTOS_KERNEL_ROOT)/portable/Synopsys/ARC/arc_support.s
 
@@ -178,10 +178,11 @@ ALL_INC_DIRS = . $(ARC_CORE_CONFIG_DIR) $(EMBARC_BSP_INC_DIRS) \
 # Compiler Options
 ###
 ALL_INCLUDES = $(foreach dir,$(ALL_INC_DIRS),-I$(dir))
+ALL_DEFINES = -DMID_COMMON
 
 LMAP_OPTION = -Wl,-M,-Map=$(APPL_FULL_NAME).map
 MKDEP_OPT = -MMD -MT $@ -MF $@.d
-COMMON_COMPILE_OPT = -mno-sdata $(ALL_INCLUDES) $(MKDEP_OPT)
+COMMON_COMPILE_OPT = -g -O2 -mno-sdata $(ALL_INCLUDES) $(MKDEP_OPT) $(ALL_DEFINES)
 
 CFLAGS = @$(COMPILE_OPT_ARGFILE) $(COMMON_COMPILE_OPT) -std=gnu99
 CXXFLAGS = @$(COMPILE_OPT_ARGFILE) $(COMMON_COMPILE_OPT)
@@ -190,12 +191,21 @@ LDFLAGS = @$(COMPILE_OPT_ARGFILE) -mno-sdata -nostartfiles \
 		$(LMAP_OPTION) -Wl,--script=$(APP_LINK_FILE)
 LDFLAGS_LIBS = -Wl,--start-group -lm -lc -lgcc -Wl,--end-group
 
+ifeq ($(DBG), arc-elf32-gdb)
 DBG_HW_FLAGS = -ex "target remote | openocd --pipe $(OPENOCD_OPTIONS)" -ex "load"
-
-ifeq ($(MAKECMDGOALS),run)
-DBG_HW_FLAGS += -ex "c"
+else
+DBG_HW_FLAGS = -nooptions -nogoifmain -toggle=include_local_symbols=1 -OS=FreeRTOS -digilent
 endif
 
+## Run target options
+ifeq ($(MAKECMDGOALS),run)
+ifeq ($(DBG), mdb)
+DBG_HW_FLAGS += -run
+endif
+ifeq ($(DBG), arc-elf32-gdb)
+DBG_HW_FLAGS += -ex "c"
+endif
+endif
 #
 # Define all object files.
 #
@@ -253,6 +263,8 @@ clean :
 	@$(ECHO) "Clean all object files and dependency files"
 	-$(Q)rm -rf $(ALLOBJS)
 	-$(Q)rm -rf $(ALLDEPS)
-	-$(Q)rm -rf $(APPL_FULL_NAME).elf $(APPL_FULL_NAME).map openocd.log
+	-$(Q)rm -rf $(APPL_FULL_NAME).elf $(APPL_FULL_NAME).map
+	-$(Q)rm -rf openocd.log .sc.project
+	@$(ECHO) "Clean finished"
 
 -include $(ALLDEPS)

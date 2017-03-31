@@ -77,9 +77,10 @@
 #include "FreeRTOS.h"
 #include "partest.h"
 #include "board/board.h"
+#include "inc/embARC_debug.h"
 
 #define partstNUM_LEDS			( 9 )
-
+static volatile uint32_t led_value = 0;
 /*-----------------------------------------------------------
  * Simple parallel port IO routines.
  *-----------------------------------------------------------*/
@@ -87,12 +88,14 @@
 void vParTestInitialise( void )
 {
 	/* Init done in board_main function */
+    led_value = 0;
+    led_write(0x0, 0x1FF);
 }
 /*-----------------------------------------------------------*/
 
 void vParTestSetLED( unsigned portBASE_TYPE uxLED, signed portBASE_TYPE xValue )
 {
-    unsigned long ulLED = 0;
+    unsigned long ulLED = 1;
 
 	if( uxLED < partstNUM_LEDS )
 	{
@@ -104,10 +107,12 @@ void vParTestSetLED( unsigned portBASE_TYPE uxLED, signed portBASE_TYPE xValue )
 		if( xValue )
 		{
 			led_write(ulLED, ulLED);
+            led_value |= ulLED;
 		}
 		else
 		{
             led_write(0, ulLED);
+            led_value &= ~ulLED;
 		}
 	}
 }
@@ -115,20 +120,23 @@ void vParTestSetLED( unsigned portBASE_TYPE uxLED, signed portBASE_TYPE xValue )
 
 void vParTestToggleLED( unsigned portBASE_TYPE uxLED )
 {
-    unsigned long ulLED, ulCurrentState;
+    unsigned long ulLED = 1, ulCurrentState;
 
 	if( uxLED < partstNUM_LEDS )
 	{
 		/* Rotate to the wanted bit of port 0.  Only P10 to P13 have an LED
 		attached. */
-		ulLED <<= ( unsigned long ) uxLED;
 
+        ulLED <<= ( unsigned long ) uxLED;
 		/* If this bit is already set, clear it, and vice versa. */
-		ulCurrentState = led_read(ulLED) >> ulLED;
+        //ulCurrentState = led_read(ulLED) >> uxLED;
+		ulCurrentState = led_value >> uxLED;
 		if (ulCurrentState) {
-            led_write(0, ulLED);
+            vParTestSetLED(uxLED, 0);
+            //EMBARC_PRINTF("LED %d off\r\n", uxLED);
         } else {
-            led_write(ulLED, ulLED);
+            vParTestSetLED(uxLED, 1);
+            //EMBARC_PRINTF("LED %d on\r\n", uxLED);
         }
 	}
 }

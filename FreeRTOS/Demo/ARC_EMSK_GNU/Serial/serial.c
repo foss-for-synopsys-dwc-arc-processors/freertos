@@ -221,7 +221,9 @@ signed portBASE_TYPE xSerialPutChar( xComPortHandle pxPort, signed char cOutChar
 	signed portBASE_TYPE xReturn;
 
 	/* This demo driver only supports one port so the parameter is not used. */
-	DEV_UART *uart_obj = (DEV_UART *)pxPort;
+	( void ) pxPort;
+
+	DEV_UART *uart_obj = (DEV_UART *)serUART;
 	uint32_t bytes_avail = 0;
 
 	portENTER_CRITICAL();
@@ -233,7 +235,6 @@ signed portBASE_TYPE xSerialPutChar( xComPortHandle pxPort, signed char cOutChar
 			uart_obj->uart_write((const void *)&cOutChar, 1);
 			uart_obj->uart_control(UART_CMD_GET_TXAVAIL, (void *)(&bytes_avail));
 			if (bytes_avail == 0) {
-				uart_obj->uart_control(UART_CMD_SET_TXINT, (void *)(1));
 				*plTHREEmpty = ( long ) pdFALSE;
 			}
 			xReturn = pdPASS;
@@ -242,6 +243,7 @@ signed portBASE_TYPE xSerialPutChar( xComPortHandle pxPort, signed char cOutChar
 			Block for a maximum of xBlockTime if there is no space in the
 			queue. */
 			xReturn = xQueueSend( xCharsForTx, &cOutChar, xBlockTime );
+			uart_obj->uart_control(UART_CMD_SET_TXINT, (void *)(1));
 
 			/* Depending on queue sizing and task prioritisation:  While we
 			were blocked waiting to post interrupts were not disabled.  It is
@@ -262,7 +264,8 @@ signed portBASE_TYPE xSerialPutChar( xComPortHandle pxPort, signed char cOutChar
 void vSerialClose( xComPortHandle xPort )
 {
 	/* Not supported as not required by the demo application. */
-	DEV_UART *uart_obj = (DEV_UART *)xPort;
+	( void ) xPort;
+	DEV_UART *uart_obj = (DEV_UART *)serUART;
 	uart_obj->uart_close();
 }
 /*-----------------------------------------------------------*/

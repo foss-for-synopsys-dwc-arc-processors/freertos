@@ -78,13 +78,20 @@
 #include "inc/arc/arc_timer.h"
 #include "board/board.h"
 
-#include "arc_freertos_exceptions.h"
+/* task dispatch functions in .s */
+extern void start_r(void);
+extern void start_dispatch();
+extern void dispatch();
 
 volatile unsigned int ulCriticalNesting = 999UL;
 volatile unsigned int context_switch_reqflg;	/* task context switch request flag in exceptions and interrupts handling */
 
 #ifndef BOARD_OS_TIMER_ID
-#define BOARD_OS_TIMER_ID   BOARD_SYS_TIMER_ID
+#define BOARD_OS_TIMER_ID       BOARD_SYS_TIMER_ID
+#endif
+
+#ifndef BOARD_OS_TIMER_INTNO
+#define BOARD_OS_TIMER_INTNO    BOARD_SYS_TIMER_INTNO
 #endif
 
 /* --------------------------------------------------------------------------*/
@@ -112,12 +119,12 @@ static void prvSetupTimerInterrupt(void)
 {
 	unsigned int cyc = configCPU_CLOCK_HZ / configTICK_RATE_HZ;
 
-	int_disable(BOARD_OS_TIMER_ID); /* disable os timer interrupt */
+	int_disable(BOARD_OS_TIMER_INTNO); /* disable os timer interrupt */
 	timer_stop(BOARD_OS_TIMER_ID);
 	timer_start(BOARD_OS_TIMER_ID, TIMER_CTRL_IE | TIMER_CTRL_NH, cyc);
 
-	int_handler_install(BOARD_OS_TIMER_ID, (INT_HANDLER)vKernelTick);
-	int_enable(BOARD_OS_TIMER_ID);
+	int_handler_install(BOARD_OS_TIMER_INTNO, (INT_HANDLER)vKernelTick);
+	int_enable(BOARD_OS_TIMER_INTNO);
 }
 
 /*

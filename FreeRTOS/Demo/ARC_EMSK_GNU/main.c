@@ -177,7 +177,7 @@ error. */
 
 /* Constants used by the vMemCheckTask() task. */
 #define mainCOUNT_INITIAL_VALUE		( ( unsigned long ) 0 )
-#define mainNO_TASK					( 0 )
+#define mainNO_TASK			( 0 )
 
 /* The size of the memory blocks allocated by the vMemCheckTask() task. */
 #define mainMEM_CHECK_SIZE_1		( ( size_t ) 51 )

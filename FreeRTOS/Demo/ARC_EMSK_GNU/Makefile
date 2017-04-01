@@ -181,7 +181,7 @@ ALL_INC_DIRS = . $(ARC_CORE_CONFIG_DIR) $(EMBARC_BSP_INC_DIRS) \
 ifeq ($(DEBUG), 1)
 	OS_FREERTOS_DEFINES += -DINCLUDE_uxTaskGetStackHighWaterMark=1
 	OS_FREERTOS_DEFINES += -DconfigGENERATE_RUN_TIME_STATS=1
-	COMMON_COMPILE_OPT += -g
+	COMMON_COMPILE_OPT += -g -gdwarf-2
 endif
 
 ALL_INCLUDES = $(foreach dir,$(ALL_INC_DIRS),-I$(dir))
@@ -194,7 +194,7 @@ COMMON_COMPILE_OPT += -O2 -mno-sdata $(ALL_INCLUDES) $(MKDEP_OPT) $(ALL_DEFINES)
 CFLAGS = @$(COMPILE_OPT_ARGFILE) $(COMMON_COMPILE_OPT) -std=gnu99
 CXXFLAGS = @$(COMPILE_OPT_ARGFILE) $(COMMON_COMPILE_OPT)
 ASFLAGS = @$(COMPILE_OPT_ARGFILE) $(COMMON_COMPILE_OPT) -x assembler-with-cpp
-LDFLAGS = @$(COMPILE_OPT_ARGFILE) -mno-sdata -nostartfiles \
+LDFLAGS = @$(COMPILE_OPT_ARGFILE) -g -mno-sdata -nostartfiles \
 		$(LMAP_OPTION) -Wl,--script=$(APP_LINK_FILE)
 LDFLAGS_LIBS = -Wl,--start-group -lm -lc -lgcc -Wl,--end-group
 
@@ -271,7 +271,7 @@ clean :
 	-$(Q)rm -rf $(ALLOBJS)
 	-$(Q)rm -rf $(ALLDEPS)
 	-$(Q)rm -rf $(APPL_FULL_NAME).elf $(APPL_FULL_NAME).map
-	-$(Q)rm -rf openocd.log .sc.project
+	-$(Q)rm -rf openocd.log .sc.project *.log
 	@$(ECHO) "Clean finished"
 
 -include $(ALLDEPS)

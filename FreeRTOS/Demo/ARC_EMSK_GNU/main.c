@@ -132,6 +132,7 @@
 #include "dynamic.h"
 #include "BlockQ.h"
 #include "serial.h"
+#include "inc/embARC_debug.h"
 
 /*-----------------------------------------------------------*/
 
@@ -159,7 +160,7 @@
 
 /* Constants for the ComTest tasks. */
 #define mainCOM_TEST_BAUD_RATE	( ( unsigned long ) 115200 )
-#define mainCOM_TEST_LED		( 3 )
+#define mainCOM_TEST_LED	( 3 )
 
 /* Priorities for the demo application tasks. */
 #define mainLED_TASK_PRIORITY		( tskIDLE_PRIORITY + 3 )
@@ -173,7 +174,7 @@
 error. */
 #define mainNO_ERROR_FLASH_PERIOD	( ( TickType_t ) 3000 / portTICK_PERIOD_MS  )
 #define mainERROR_FLASH_PERIOD		( ( TickType_t ) 500 / portTICK_PERIOD_MS  )
-#define mainON_BOARD_LED_BIT		( ( unsigned long ) 0x80 )
+#define mainON_BOARD_LED		( 8 )
 
 /* Constants used by the vMemCheckTask() task. */
 #define mainCOUNT_INITIAL_VALUE		( ( unsigned long ) 0 )
@@ -233,7 +234,7 @@ int main( void )
 	vAltStartComTestTasks( mainCOM_TEST_PRIORITY, mainCOM_TEST_BAUD_RATE, mainCOM_TEST_LED );
 	vStartLEDFlashTasks( mainLED_TASK_PRIORITY );
 	vStartPolledQueueTasks( mainQUEUE_POLL_PRIORITY );
-	vStartMathTasks( tskIDLE_PRIORITY );
+	//vStartMathTasks( tskIDLE_PRIORITY );
 	vStartSemaphoreTasks( mainSEM_TEST_PRIORITY );
 	vStartDynamicPriorityTasks();
 	vStartBlockingQueueTasks( mainBLOCK_Q_PRIORITY );
@@ -320,51 +321,60 @@ static void prvSetupHardware( void )
 
 void prvToggleOnBoardLED( void )
 {
-	vParTestToggleLED(8);
+	vParTestToggleLED(mainON_BOARD_LED);
 }
 /*-----------------------------------------------------------*/
 
 static long prvCheckOtherTasksAreStillRunning( unsigned long ulMemCheckTaskCount )
 {
 long lReturn = ( long ) pdPASS;
+static volatile uint32_t check_flag = 0;
 
 	/* Check all the demo tasks (other than the flash tasks) to ensure
 	that they are all still running, and that none of them have detected
 	an error. */
 
+	check_flag = 0;
 	if( xAreIntegerMathsTaskStillRunning() != pdTRUE )
 	{
 		lReturn = ( long ) pdFAIL;
+		check_flag |= 1<<0;
 	}
 
-	if( xAreComTestTasksStillRunning() != pdTRUE )
-	{
-		lReturn = ( long ) pdFAIL;
-	}
+	// if( xAreComTestTasksStillRunning() != pdTRUE )
+	// {
+	// 	lReturn = ( long ) pdFAIL;
+	// 	check_flag |= 1<<1;
+	// }
 
 	if( xArePollingQueuesStillRunning() != pdTRUE )
 	{
 		lReturn = ( long ) pdFAIL;
+		check_flag |= 1<<2;
 	}
 
-	if( xAreMathsTaskStillRunning() != pdTRUE )
-	{
-		lReturn = ( long ) pdFAIL;
-	}
+	// if( xAreMathsTaskStillRunning() != pdTRUE )
+	// {
+	// 	lReturn = ( long ) pdFAIL;
+	// 	check_flag |= 1<<3;
+	// }
 
 	if( xAreSemaphoreTasksStillRunning() != pdTRUE )
 	{
 		lReturn = ( long ) pdFAIL;
+		check_flag |= 1<<4;
 	}
 
 	if( xAreDynamicPriorityTasksStillRunning() != pdTRUE )
 	{
 		lReturn = ( long ) pdFAIL;
+		check_flag |= 1<<5;
 	}
 
 	if( xAreBlockingQueuesStillRunning() != pdTRUE )
 	{
 		lReturn = ( long ) pdFAIL;
+		check_flag |= 1<<6;
 	}
 
 	if( ulMemCheckTaskCount == mainCOUNT_INITIAL_VALUE )
@@ -372,6 +382,7 @@ long lReturn = ( long ) pdPASS;
 		/* The vMemCheckTask did not increment the counter - it must
 		have failed. */
 		lReturn = ( long ) pdFAIL;
+		check_flag |= 1<<7;
 	}
 
 	return lReturn;

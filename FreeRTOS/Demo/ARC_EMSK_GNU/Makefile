@@ -120,7 +120,7 @@ EMBARC_BSP_CSRC_DIRS = $(EMBARC_BSP_ROOT)/arc/startup $(EMBARC_BSP_ROOT)/arc \
 			$(EMBARC_BSP_ROOT)/device/designware/gpio \
 			$(EMBARC_BSP_ROOT)/device/designware/iic  \
 			$(EMBARC_BSP_ROOT)/device/designware/uart \
-			$(EMBARC_BSP_ROOT)/common $(EMBARC_BSP_ROOT)/common/xprintf
+			$(EMBARC_BSP_ROOT)/common
 
 
 EMBARC_BSP_ASMSRC_DIRS = $(EMBARC_BSP_ROOT)/arc/startup $(EMBARC_BSP_ROOT)/arc
@@ -181,7 +181,10 @@ ALL_INC_DIRS = . $(ARC_CORE_CONFIG_DIR) $(EMBARC_BSP_INC_DIRS) \
 ifeq ($(DEBUG), 1)
 	OS_FREERTOS_DEFINES += -DINCLUDE_uxTaskGetStackHighWaterMark=1
 	OS_FREERTOS_DEFINES += -DconfigGENERATE_RUN_TIME_STATS=1
-	COMMON_COMPILE_OPT += -g -gdwarf-2
+	COMMON_COMPILE_OPT += -g
+ifeq ($(DBG), mdb)
+	COMMON_COMPILE_OPT += -gdwarf-3
+endif
 endif
 
 ALL_INCLUDES = $(foreach dir,$(ALL_INC_DIRS),-I$(dir))
@@ -194,7 +197,7 @@ COMMON_COMPILE_OPT += -O2 -mno-sdata $(ALL_INCLUDES) $(MKDEP_OPT) $(ALL_DEFINES)
 CFLAGS = @$(COMPILE_OPT_ARGFILE) $(COMMON_COMPILE_OPT) -std=gnu99
 CXXFLAGS = @$(COMPILE_OPT_ARGFILE) $(COMMON_COMPILE_OPT)
 ASFLAGS = @$(COMPILE_OPT_ARGFILE) $(COMMON_COMPILE_OPT) -x assembler-with-cpp
-LDFLAGS = @$(COMPILE_OPT_ARGFILE) -g -mno-sdata -nostartfiles \
+LDFLAGS = @$(COMPILE_OPT_ARGFILE) -mno-sdata -nostartfiles \
 		$(LMAP_OPTION) -Wl,--script=$(APP_LINK_FILE)
 LDFLAGS_LIBS = -Wl,--start-group -lm -lc -lgcc -Wl,--end-group
 

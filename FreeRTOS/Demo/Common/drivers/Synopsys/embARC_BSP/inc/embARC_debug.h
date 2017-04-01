@@ -46,7 +46,7 @@ extern "C" {
 
 #ifndef EMBARC_PRINTF
 	#ifdef MID_COMMON
-		#include "common/xprintf/xprintf.h"
+		#include "common/xprintf.h"
 		#define EMBARC_PRINTF xprintf
 	#else
 		#include <stdio.h>

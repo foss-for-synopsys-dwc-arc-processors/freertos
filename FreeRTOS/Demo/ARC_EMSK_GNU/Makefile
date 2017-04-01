@@ -142,8 +142,7 @@ FREERTOS_KERNEL_CSRCS = $(FREERTOS_KERNEL_ROOT)/croutine.c \
 		$(FREERTOS_KERNEL_ROOT)/tasks.c \
 		$(FREERTOS_KERNEL_ROOT)/timers.c \
 		$(FREERTOS_KERNEL_ROOT)/portable/MemMang/heap_2.c \
-		$(FREERTOS_KERNEL_ROOT)/portable/Synopsys/ARC/port.c \
-		$(FREERTOS_KERNEL_ROOT)/portable/Synopsys/ARC/freertos_tls.c
+		$(FREERTOS_KERNEL_ROOT)/portable/Synopsys/ARC/port.c
 
 FREERTOS_KERNEL_ASMSRCS = $(FREERTOS_KERNEL_ROOT)/portable/Synopsys/ARC/arc_support.s
 
@@ -178,7 +177,6 @@ ALL_INC_DIRS = . $(ARC_CORE_CONFIG_DIR) $(EMBARC_BSP_INC_DIRS) \
 ###
 # Compiler Options
 ###
-OS_FREERTOS_DEFINES = -DconfigNUM_THREAD_LOCAL_STORAGE_POINTERS=1 -DconfigUSE_RECURSIVE_MUTEXES=1
 
 ifeq ($(DEBUG), 1)
 	OS_FREERTOS_DEFINES += -DINCLUDE_uxTaskGetStackHighWaterMark=1

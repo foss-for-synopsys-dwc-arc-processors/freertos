@@ -144,7 +144,7 @@ FREERTOS_KERNEL_CSRCS = $(FREERTOS_KERNEL_ROOT)/croutine.c \
 		$(FREERTOS_KERNEL_ROOT)/portable/MemMang/heap_2.c \
 		$(FREERTOS_KERNEL_ROOT)/portable/Synopsys/ARC/port.c
 
-FREERTOS_KERNEL_ASMSRCS = $(FREERTOS_KERNEL_ROOT)/portable/Synopsys/ARC/arc_support.s
+FREERTOS_KERNEL_ASMSRCS = $(FREERTOS_KERNEL_ROOT)/portable/Synopsys/ARC/arc_support.S
 
 FREERTOS_KERNEL_INC_DIRS = $(FREERTOS_KERNEL_ROOT)/include \
 		$(FREERTOS_KERNEL_ROOT)/portable/Synopsys/ARC
@@ -181,10 +181,7 @@ ALL_INC_DIRS = . $(ARC_CORE_CONFIG_DIR) $(EMBARC_BSP_INC_DIRS) \
 ifeq ($(DEBUG), 1)
 	OS_FREERTOS_DEFINES += -DINCLUDE_uxTaskGetStackHighWaterMark=1
 	OS_FREERTOS_DEFINES += -DconfigGENERATE_RUN_TIME_STATS=1
-	COMMON_COMPILE_OPT += -g
-ifeq ($(DBG), mdb)
-	COMMON_COMPILE_OPT += -gdwarf-3
-endif
+	COMMON_COMPILE_OPT += -g3 -gdwarf-2
 endif
 
 ALL_INCLUDES = $(foreach dir,$(ALL_INC_DIRS),-I$(dir))
@@ -222,7 +219,7 @@ endif
 COBJS = $(addsuffix .o, $(ALL_C_SRCS))
 CXXOBJS = $(addsuffix .o, $(ALL_CXX_SRCS))
 ASMOBJS = $(addsuffix .o, $(ALL_ASM_SRCS))
-ALLOBJS = $(COBJS) $(CXXOBJS) $(ASMOBJS)
+ALLOBJS = $(ASMOBJS) $(COBJS) $(CXXOBJS)
 ALLDEPS = $(ALLOBJS:.o=.o.d)
 
 .PHONY : all bin hex size clean run gui

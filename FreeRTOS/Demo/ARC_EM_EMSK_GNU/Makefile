@@ -88,6 +88,7 @@ APPL_FULL_NAME = RTOS_Demo
 ###
 CC=arc-elf32-gcc
 OBJCOPY=arc-elf32-objcopy
+DUMP=arc-elf32-objdump
 AR=arc-elf32-ar
 SIZE=arc-elf32-size
 DBG=arc-elf32-gdb

@@ -178,12 +178,7 @@ extern volatile unsigned int ulCriticalNesting;
 #define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() do {} while (0)	/* we use the timer */
 #define portALT_GET_RUN_TIME_COUNTER_VALUE(dest) (dest = xTickCount)
 
-#if defined(__MW__)
-extern void task_end_hook(void *pxTCB);
-#define portCLEAN_UP_TCB( pxTCB )	task_end_hook((void *)pxTCB)
-#else
 #define portCLEAN_UP_TCB( pxTCB )	( void ) pxTCB
-#endif
 
 void vPortYield(void);
 void vPortYieldFromIsr(void);

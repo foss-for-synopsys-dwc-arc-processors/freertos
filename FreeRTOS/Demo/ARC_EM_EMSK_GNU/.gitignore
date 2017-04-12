@@ -1,1 +1,7 @@
 /Debug/
+/BUILD_*/
+*.o
+*.elf
+*.map
+*.d
+*.log

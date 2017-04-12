@@ -2,7 +2,7 @@
 <?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="org.eclipse.cdt.cross.arc.gnu.linux.elf.debug.597367339">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.eclipse.cdt.cross.arc.gnu.linux.elf.debug.597367339" moduleId="org.eclipse.cdt.core.settings" name="Debug">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.eclipse.cdt.cross.arc.gnu.linux.elf.debug.597367339" moduleId="org.eclipse.cdt.core.settings" name="BUILD_23_ARCEM11D">
 				<externalSettings>
 					<externalSetting/>
 				</externalSettings>
@@ -16,7 +16,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" description="" id="org.eclipse.cdt.cross.arc.gnu.linux.elf.debug.597367339" name="Debug" parent="org.eclipse.cdt.cross.arc.gnu.linux.elf.debug">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" description="EMSK 2.3 EM11D Core Configuration" id="org.eclipse.cdt.cross.arc.gnu.linux.elf.debug.597367339" name="BUILD_23_ARCEM11D" parent="org.eclipse.cdt.cross.arc.gnu.linux.elf.debug">
 					<folderInfo id="org.eclipse.cdt.cross.arc.gnu.linux.elf.debug.597367339." name="/" resourcePath="">
 						<toolChain id="org.eclipse.cdt.cross.arc.gnu.linux.elf.toolchain.debug.345090512" name="GNU Toolchain for ARC EM" superClass="org.eclipse.cdt.cross.arc.gnu.linux.elf.toolchain.debug">
 							<option id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.debugging.level.1138885403" name="Debug level" superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.option.debugging.level" value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.max" valueType="enumerated"/>
@@ -30,8 +30,9 @@
 							<option id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.divide.817680115" name="Integer divide instructions (-mdiv-rem)" superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.divide" value="true" valueType="boolean"/>
 							<option id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize.1392496512" name="Bitscan instruction (-mnorm)" superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize" value="true" valueType="boolean"/>
 							<option id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap.18980411" name="Swap instruction (-mswap)" superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap" value="true" valueType="boolean"/>
+							<option id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.maptcf.1449521803" superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.maptcf" value="false" valueType="boolean"/>
 							<targetPlatform id="org.eclipse.cdt.cross.arc.gnu.linux.elf.platform.debug.534883064" isAbstract="false" name="All Platform" superClass="org.eclipse.cdt.cross.arc.gnu.linux.elf.platform.debug"/>
-							<builder buildPath="${workspace_loc:/freertos_demo}/Debug" id="org.eclipse.cdt.cross.arc.gnu.linux.elf.builder.debug.858668421" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="GNU Make Builder for ARC" superClass="org.eclipse.cdt.cross.arc.gnu.linux.elf.builder.debug"/>
+							<builder buildPath="${workspace_loc:/freertos_demo}/BUILD_23_ARCEM11D" id="org.eclipse.cdt.cross.arc.gnu.linux.elf.builder.debug.858668421" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="GNU Make Builder for ARC" superClass="org.eclipse.cdt.cross.arc.gnu.linux.elf.builder.debug"/>
 							<tool id="org.eclipse.cdt.cross.arc.gnu.linux.elf.assembler.debug.132594399" name="ARC ELF32 GCC Assembler" superClass="org.eclipse.cdt.cross.arc.gnu.linux.elf.assembler.debug">
 								<option id="org.eclipse.cdt.cross.arc.gnu.assembler.option.include.paths.1117239474" name="Include paths (-I)" superClass="org.eclipse.cdt.cross.arc.gnu.assembler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CoreConfig/23_ARCEM11D}&quot;"/>
@@ -114,8 +115,12 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="BUILD_23_ARCEM11D">
+			<resource resourceType="PROJECT" workspacePath="/freertos_demo"/>
+		</configuration>
 		<configuration configurationName="Debug">
 			<resource resourceType="PROJECT" workspacePath="/freertos_demo"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

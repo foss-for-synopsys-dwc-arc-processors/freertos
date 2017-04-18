@@ -30,7 +30,7 @@
 							<option id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.divide.817680115" name="Integer divide instructions (-mdiv-rem)" superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.divide" value="true" valueType="boolean"/>
 							<option id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize.1392496512" name="Bitscan instruction (-mnorm)" superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize" value="true" valueType="boolean"/>
 							<option id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap.18980411" name="Swap instruction (-mswap)" superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap" value="true" valueType="boolean"/>
-							<option id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.maptcf.1449521803" superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.maptcf" value="false" valueType="boolean"/>
+							<option id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.maptcf.1449521803" name="Use memory map from TCF" superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.maptcf" value="false" valueType="boolean"/>
 							<targetPlatform id="org.eclipse.cdt.cross.arc.gnu.linux.elf.platform.debug.534883064" isAbstract="false" name="All Platform" superClass="org.eclipse.cdt.cross.arc.gnu.linux.elf.platform.debug"/>
 							<builder buildPath="${workspace_loc:/freertos_demo}/BUILD_23_ARCEM11D" id="org.eclipse.cdt.cross.arc.gnu.linux.elf.builder.debug.858668421" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="GNU Make Builder for ARC" superClass="org.eclipse.cdt.cross.arc.gnu.linux.elf.builder.debug"/>
 							<tool id="org.eclipse.cdt.cross.arc.gnu.linux.elf.assembler.debug.132594399" name="ARC ELF32 GCC Assembler" superClass="org.eclipse.cdt.cross.arc.gnu.linux.elf.assembler.debug">
@@ -41,6 +41,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Source/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Demo/Common/include}&quot;"/>
+								</option>
+								<option id="org.eclipse.cdt.cross.arc.gnu.assembler.option.preprocessor.def.1025941114" superClass="org.eclipse.cdt.cross.arc.gnu.assembler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="MID_COMMON"/>
 								</option>
 								<inputType id="org.eclipse.cdt.cross.arc.gnu.em.linux.assembler.base.input.1666471892" superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.assembler.base.input"/>
 							</tool>
@@ -54,6 +57,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Demo/Common/include}&quot;"/>
 								</option>
+								<option id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.preprocessor.def.1444166640" superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="MID_COMMON"/>
+								</option>
 								<inputType id="org.eclipse.cdt.cross.arc.gnu.em.linux.c.compiler.base.input.959396044" superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.c.compiler.base.input"/>
 							</tool>
 							<tool id="org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.compiler.debug.705010791" name="ARC ELF32 GCC C++ Compiler" superClass="org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.compiler.debug">
@@ -65,6 +71,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Source/portable/Synopsys/ARC}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Demo/Common/include}&quot;"/>
+								</option>
+								<option id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.preprocessor.def.1878677044" superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="MID_COMMON"/>
 								</option>
 								<inputType id="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.compiler.base.input.784799857" superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.compiler.base.input"/>
 							</tool>

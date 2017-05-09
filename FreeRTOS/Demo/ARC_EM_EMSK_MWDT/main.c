@@ -234,7 +234,7 @@ int main( void )
 	vAltStartComTestTasks( mainCOM_TEST_PRIORITY, mainCOM_TEST_BAUD_RATE, mainCOM_TEST_LED );
 	vStartLEDFlashTasks( mainLED_TASK_PRIORITY );
 	vStartPolledQueueTasks( mainQUEUE_POLL_PRIORITY );
-	//vStartMathTasks( tskIDLE_PRIORITY );
+	vStartMathTasks( tskIDLE_PRIORITY );
 	vStartSemaphoreTasks( mainSEM_TEST_PRIORITY );
 	vStartDynamicPriorityTasks();
 	vStartBlockingQueueTasks( mainBLOCK_Q_PRIORITY );
@@ -353,11 +353,11 @@ static volatile uint32_t check_flag = 0;
 		check_flag |= 1<<2;
 	}
 
-	// if( xAreMathsTaskStillRunning() != pdTRUE )
-	// {
-	// 	lReturn = ( long ) pdFAIL;
-	// 	check_flag |= 1<<3;
-	// }
+	if( xAreMathsTaskStillRunning() != pdTRUE )
+	{
+		lReturn = ( long ) pdFAIL;
+		check_flag |= 1<<3;
+	}
 
 	if( xAreSemaphoreTasksStillRunning() != pdTRUE )
 	{

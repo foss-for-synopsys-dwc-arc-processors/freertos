@@ -1,5 +1,5 @@
 /*
-    FreeRTOS V9.0.0 - Copyright (C) 2016 Real Time Engineers Ltd.
+    FreeRTOS V9.0.1 - Copyright (C) 2017 Real Time Engineers Ltd.
     All rights reserved
 
     VISIT http://www.FreeRTOS.org TO ENSURE YOU ARE USING THE LATEST VERSION.
@@ -66,14 +66,21 @@
 
     1 tab == 4 spaces!
 */
-/*
- * Implementation of functions defined in portable.h
- */
+
+/*-----------------------------------------------------------
+ * Implementation of functions defined in portable.h for the ARCv2 EM port.
+ *----------------------------------------------------------*/
+
 
 #include "FreeRTOS.h"
 #include "task.h"
 #include "FreeRTOSConfig.h"
 
+/**
+ * Many functions required in this port is provided in embARC BSP.
+ * The embARC BSP located in FreeRTOS/Demo/Common/drivers/Synopsys/embARC_BSP
+ */
+/* Extra required header files which are provided in embARC BSP */
 #include "inc/arc/arc_exception.h"
 #include "inc/arc/arc_timer.h"
 #include "board/board.h"

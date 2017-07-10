@@ -1,0 +1,11 @@
+	-mcpu=hs38
+	-mlittle-endian
+	-matomic
+	-mll64
+	-mdiv-rem
+	-mswap
+	-mnorm
+	-mmpy-option=9
+	-mbarrel-shifter
+	--param l1-cache-size=32768
+	--param l1-cache-line-size=64

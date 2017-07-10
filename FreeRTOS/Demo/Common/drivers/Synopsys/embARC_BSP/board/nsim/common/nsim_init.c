@@ -27,47 +27,43 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * \version 2017.03
- * \date 2014-07-03
- * \author Huaqi Fang(Huaqi.Fang@synopsys.com)
+ * \date 2015-07-10
+ * \author Wayne Ren(Wei.Ren@synopsys.com)
 --------------------------------------------- */
 /**
- *
- * \file
- * \ingroup	BOARD_COMMON
- * \brief	common board header file
+ * \defgroup	BOARD_NSIM_COMMON_INIT	NSIM Common Init Module
+ * \ingroup	BOARD_NSIM_COMMON
+ * \brief	NSIM Common Init Module
  * \details
- * - This header file will contain board related settings for different boards.
- * - Each board configurations are put in its own header file, like emsk/emsk.h
- * - If you want to change the configuration, you need to go to related header file, e.g.
- *   if you want to change EMSK board settings, you need to go to emsk/emsk.h
- * - In embARC 2015.05, all the settings are in this board.h, but now it moved to related board header file
  */
 
 /**
- * \addtogroup BOARD_COMMON
+ * \file
+ * \ingroup	BOARD_NSIM_COMMON_INIT
+ * \brief	common nsim init module
+ */
+
+/**
+ * \addtogroup	BOARD_NSIM_COMMON_INIT
  * @{
  */
-#ifndef _EMBARC_BOARD_H_
-#define _EMBARC_BOARD_H_
+#include "inc/arc/arc_builtin.h"
+#include "inc/arc/arc.h"
+#include "inc/arc/arc_timer.h"
+#include "inc/arc/arc_exception.h"
 
-#include "embARC_BSP_config.h"
+#include "board/board.h"
+
 /**
- * \todo	add comments and documents to describe the macros
- * \note 	the following macros must use the same name, because
- *	they are used by middleware and other applications
+ * \brief	Board init routine MUST be called in each application
+ * \note	It is better to disable interrupts when calling this function
+ *	remember to enable interrupt when you want to use them
  */
-/** here is a sample of EMSK board resource definitions */
-#ifdef BOARD_EMSK
-#include "board/emsk/emsk.h"
-#else
-#ifdef BOARD_NSIM
-#include "board/nsim/nsim.h"
-#else
-#endif
-#endif /* BOARD_EMSK */
+void board_init(void)
+{
+	timer_init();
+	nsim_timer_init();
+}
 
-/** you can add your board configuration as BOARD_EMSK defined up */
+/** @} end of group BOARD_NSIM_COMMON_INIT */
 
-#endif /* _EMBARC_BOARD_H_ */
-
-/** @} end of group BOARD_COMMON */

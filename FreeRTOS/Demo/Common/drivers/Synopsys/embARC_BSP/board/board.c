@@ -30,6 +30,7 @@
  * \date 2016-01-20
  * \author Wayne Ren(Wei.Ren@synopsys.com)
 --------------------------------------------- */
+#include "inc/arc/arc_exception.h"
 #include "inc/arc/arc_builtin.h"
 #include "board/board.h"
 #include "common/console_io.h"

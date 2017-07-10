@@ -27,47 +27,53 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * \version 2017.03
- * \date 2014-07-03
- * \author Huaqi Fang(Huaqi.Fang@synopsys.com)
+ * \date 2015-07-10
+ * \author Wayne Ren(Wei.Ren@synopsys.com)
 --------------------------------------------- */
 /**
- *
  * \file
- * \ingroup	BOARD_COMMON
- * \brief	common board header file
- * \details
- * - This header file will contain board related settings for different boards.
- * - Each board configurations are put in its own header file, like emsk/emsk.h
- * - If you want to change the configuration, you need to go to related header file, e.g.
- *   if you want to change EMSK board settings, you need to go to emsk/emsk.h
- * - In embARC 2015.05, all the settings are in this board.h, but now it moved to related board header file
+ * \ingroup	BOARD_NSIM_DRV_UART_OBJ
+ * \brief	header file of uart object instantiation in nsim
  */
 
 /**
- * \addtogroup BOARD_COMMON
+ * \addtogroup	BOARD_NSIM_DRV_UART_OBJ
  * @{
  */
-#ifndef _EMBARC_BOARD_H_
-#define _EMBARC_BOARD_H_
+#ifndef _NSIM_UART_OBJ_H_
+#define _NSIM_UART_OBJ_H_
 
-#include "embARC_BSP_config.h"
+#include "device/device_hal/inc/dev_uart.h"
+
 /**
- * \todo	add comments and documents to describe the macros
- * \note 	the following macros must use the same name, because
- *	they are used by middleware and other applications
+ * \name	NSIM UART Object Number
+ * @{
  */
-/** here is a sample of EMSK board resource definitions */
-#ifdef BOARD_EMSK
-#include "board/emsk/emsk.h"
-#else
-#ifdef BOARD_NSIM
-#include "board/nsim/nsim.h"
-#else
+#define DW_UART_NUM	(1)	/*!< NSIM UART valid number */
+/** @} end of name */
+
+/**
+ * \name    NSIM UART Object ID Macros
+ * @{
+ */
+#define NSIM_UART_0_ID	0	/*!< uart 0 id macro */
+/** @} end of name */
+
+/**
+ * \name	NSIM UART Object Control Macros
+ * @{
+ */
+#define USE_NSIM_UART_0	1     	/*!< enable use nsim uart 0 (stdio) */
+/** @} end of name */
+
+#ifdef __cplusplus
+extern "C" {
 #endif
-#endif /* BOARD_EMSK */
 
-/** you can add your board configuration as BOARD_EMSK defined up */
+extern void nsim_uart_all_install(void);
 
-#endif /* _EMBARC_BOARD_H_ */
+#ifdef __cplusplus
+}
+#endif
 
-/** @} end of group BOARD_COMMON */
+#endif /* _NSIM_UART_OBJ_H_ */

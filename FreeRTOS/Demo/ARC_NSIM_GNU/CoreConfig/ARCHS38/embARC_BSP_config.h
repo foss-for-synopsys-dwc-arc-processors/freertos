@@ -1,5 +1,5 @@
 /* ------------------------------------------
- * Copyright (c) 2017, Synopsys, Inc. All rights reserved.
+ * Copyright (c) 2016, Synopsys, Inc. All rights reserved.
 
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -26,48 +26,41 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * \version 2017.03
- * \date 2014-07-03
- * \author Huaqi Fang(Huaqi.Fang@synopsys.com)
+ * \version 2016.05
+ * \date 2014-12-25
+ * \author Wayne Ren(Wei.Ren@synopsys.com)
 --------------------------------------------- */
-/**
- *
- * \file
- * \ingroup	BOARD_COMMON
- * \brief	common board header file
- * \details
- * - This header file will contain board related settings for different boards.
- * - Each board configurations are put in its own header file, like emsk/emsk.h
- * - If you want to change the configuration, you need to go to related header file, e.g.
- *   if you want to change EMSK board settings, you need to go to emsk/emsk.h
- * - In embARC 2015.05, all the settings are in this board.h, but now it moved to related board header file
- */
 
-/**
- * \addtogroup BOARD_COMMON
- * @{
- */
-#ifndef _EMBARC_BOARD_H_
-#define _EMBARC_BOARD_H_
+#ifndef _EMBARC_BSP_CONFIG_H_
+#define _EMBARC_BSP_CONFIG_H_
 
-#include "embARC_BSP_config.h"
-/**
- * \todo	add comments and documents to describe the macros
- * \note 	the following macros must use the same name, because
- *	they are used by middleware and other applications
- */
-/** here is a sample of EMSK board resource definitions */
-#ifdef BOARD_EMSK
-#include "board/emsk/emsk.h"
-#else
-#ifdef BOARD_NSIM
-#include "board/nsim/nsim.h"
-#else
+#ifdef __cplusplus
+extern "C" {
 #endif
-#endif /* BOARD_EMSK */
 
-/** you can add your board configuration as BOARD_EMSK defined up */
+#define BOARD_NSIM
+/****************************************************************************
+ * BSP Definitions
+ ****************************************************************************/
+/**
+ *  Toolchain Definition for MetaWare or GNU
+ */
+//#define __MW__
+#define __GNU__
 
-#endif /* _EMBARC_BOARD_H_ */
+/**
+ *  Must be set.
+ *  If changed, modify .lcf file for
+ *	.stack ALIGN(4) SIZE(524288): {}
+ *	.heap? ALIGN(4) SIZE(524288): {}
+ */
+#define _STACKSIZE			8192
+#define _HEAPSZ				8192
 
-/** @} end of group BOARD_COMMON */
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* _EMBARC_CONFIG_BSP_H_ */

@@ -126,12 +126,10 @@
 #include "flash.h"
 #include "integer.h"
 #include "PollQ.h"
-#include "comtest2.h"
 #include "semtest.h"
 #include "flop.h"
 #include "dynamic.h"
 #include "BlockQ.h"
-#include "serial.h"
 #include "inc/embARC_debug.h"
 
 /*-----------------------------------------------------------*/
@@ -231,8 +229,6 @@ int main( void )
 
 	/* Start the demo/test application tasks. */
 	vStartIntegerMathTasks( tskIDLE_PRIORITY );
-	//vAltStartComTestTasks( mainCOM_TEST_PRIORITY, mainCOM_TEST_BAUD_RATE, mainCOM_TEST_LED );
-	//vStartLEDFlashTasks( mainLED_TASK_PRIORITY );
 	vStartPolledQueueTasks( mainQUEUE_POLL_PRIORITY );
 	vStartMathTasks( tskIDLE_PRIORITY );
 	vStartSemaphoreTasks( mainSEM_TEST_PRIORITY );
@@ -289,12 +285,12 @@ TaskHandle_t xCreatedTask;
 		}
 
 		/* Delay until it is time to execute again. */
-		vTaskDelay( xDelayPeriod );
 		if (xDelayPeriod == mainNO_ERROR_FLASH_PERIOD) {
 			EMBARC_PRINTF("FreeRTOS is running normally\r\n");
 		} else {
 			EMBARC_PRINTF("FreeRTOS is running with some error\r\n");
 		}
+		vTaskDelay( xDelayPeriod );
 
 		/* Delete the dynamically created task. */
 		if( xCreatedTask != mainNO_TASK )
@@ -331,54 +327,39 @@ void prvToggleOnBoardLED( void )
 
 static long prvCheckOtherTasksAreStillRunning( unsigned long ulMemCheckTaskCount )
 {
-long lReturn = ( long ) pdPASS;
-static volatile uint32_t check_flag = 0;
+	long lReturn = ( long ) pdPASS;
 
 	/* Check all the demo tasks (other than the flash tasks) to ensure
 	that they are all still running, and that none of them have detected
 	an error. */
-
-	check_flag = 0;
 	if( xAreIntegerMathsTaskStillRunning() != pdTRUE )
 	{
 		lReturn = ( long ) pdFAIL;
-		check_flag |= 1<<0;
 	}
-
-	// if( xAreComTestTasksStillRunning() != pdTRUE )
-	// {
-	// 	lReturn = ( long ) pdFAIL;
-	// 	check_flag |= 1<<1;
-	// }
 
 	if( xArePollingQueuesStillRunning() != pdTRUE )
 	{
 		lReturn = ( long ) pdFAIL;
-		check_flag |= 1<<2;
 	}
 
 	if( xAreMathsTaskStillRunning() != pdTRUE )
 	{
 		lReturn = ( long ) pdFAIL;
-		check_flag |= 1<<3;
 	}
 
 	if( xAreSemaphoreTasksStillRunning() != pdTRUE )
 	{
 		lReturn = ( long ) pdFAIL;
-		check_flag |= 1<<4;
 	}
 
 	if( xAreDynamicPriorityTasksStillRunning() != pdTRUE )
 	{
 		lReturn = ( long ) pdFAIL;
-		check_flag |= 1<<5;
 	}
 
 	if( xAreBlockingQueuesStillRunning() != pdTRUE )
 	{
 		lReturn = ( long ) pdFAIL;
-		check_flag |= 1<<6;
 	}
 
 	if( ulMemCheckTaskCount == mainCOUNT_INITIAL_VALUE )
@@ -386,7 +367,6 @@ static volatile uint32_t check_flag = 0;
 		/* The vMemCheckTask did not increment the counter - it must
 		have failed. */
 		lReturn = ( long ) pdFAIL;
-		check_flag |= 1<<7;
 	}
 
 	return lReturn;

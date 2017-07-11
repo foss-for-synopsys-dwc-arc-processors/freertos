@@ -152,7 +152,6 @@ FREERTOS_KERNEL_INC_DIRS = $(FREERTOS_KERNEL_ROOT)/include \
 FREERTOS_DEMO_C_SRCS = $(FREERTOS_DEMO_COMMON_ROOT)/Minimal/integer.c \
 			$(FREERTOS_DEMO_COMMON_ROOT)/Minimal/flash.c \
 			$(FREERTOS_DEMO_COMMON_ROOT)/Minimal/PollQ.c \
-			$(FREERTOS_DEMO_COMMON_ROOT)/Minimal/comtest.c \
 			$(FREERTOS_DEMO_COMMON_ROOT)/Minimal/flop.c \
 			$(FREERTOS_DEMO_COMMON_ROOT)/Minimal/semtest.c \
 			$(FREERTOS_DEMO_COMMON_ROOT)/Minimal/dynamic.c \
@@ -163,7 +162,7 @@ FREERTOS_DEMO_INC_DIRS = $(FREERTOS_DEMO_COMMON_ROOT)/include
 ###
 # All C/ASM source files
 ###
-ALL_C_SRCS = main.c Serial/serial.c Serial/serialISR.c ParTest/ParTest.c \
+ALL_C_SRCS = main.c ParTest/ParTest.c \
 		$(FREERTOS_DEMO_C_SRCS) $(FREERTOS_KERNEL_CSRCS) \
 		$(EMBARC_EMSK_BSP_CSRCS)
 

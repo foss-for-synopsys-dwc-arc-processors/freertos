@@ -18,17 +18,17 @@
 					<folderInfo id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.debug.1392619847." name="/" resourcePath="">
 						<toolChain id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.toolchain.debug.943473160" name="GNU Toolchain for ARC HS" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.toolchain.debug">
 							<option id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.debugging.level.2054641906" name="Debug level" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.debugging.level" value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.max" valueType="enumerated"/>
-							<option id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.tcf.766859788" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.tcf" value="true" valueType="boolean"/>
-							<option id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.filefortcf.871404616" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.filefortcf" value="C:\Personal\workspace\sourcecode\embARC\freertos\FreeRTOS\Demo\ARC_NSIM_GNU\CoreConfig\ARCHS38\arc_core.tcf" valueType="string"/>
-							<option id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.processor.682367716" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.processor" value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38" valueType="enumerated"/>
-							<option id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyhs.987707914" superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyhs" value="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.9" valueType="enumerated"/>
-							<option id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.divide.1338718380" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.divide" value="true" valueType="boolean"/>
-							<option id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.ll64.1699659523" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.ll64" value="true" valueType="boolean"/>
-							<option id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.atomic.855983046" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.atomic" value="true" valueType="boolean"/>
+							<option id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.tcf.766859788" name="TCF" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.tcf" value="true" valueType="boolean"/>
+							<option id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.filefortcf.871404616" name="TCF path" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.filefortcf" value="C:\Personal\workspace\sourcecode\embARC\freertos\FreeRTOS\Demo\ARC_NSIM_GNU\CoreConfig\ARCHS38\arc_core.tcf" valueType="string"/>
+							<option id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.processor.682367716" name="ARC HS (-mcpu)" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.processor" value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38" valueType="enumerated"/>
+							<option id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyhs.987707914" name="Multiply instructions (ARC HS)" superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyhs" value="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.9" valueType="enumerated"/>
+							<option id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.divide.1338718380" name="Integer divide instructions (-mdiv-rem)" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.divide" value="true" valueType="boolean"/>
+							<option id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.ll64.1699659523" name="64-bit load/store instructions(-mll64)" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.ll64" value="true" valueType="boolean"/>
+							<option id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.atomic.855983046" name="Atomic functions (-matomic)" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.atomic" value="true" valueType="boolean"/>
 							<targetPlatform id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.platform.debug.1513710549" isAbstract="false" name="All Platform" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.platform.debug"/>
 							<builder buildPath="${workspace_loc:/demo_nsim_gnu}/Debug" id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.builder.debug.452623414" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="GNU Make Builder for ARC" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.builder.debug"/>
 							<tool id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.assembler.debug.22871541" name="ARC ELF32 GCC Assembler" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.assembler.debug">
-								<option id="org.eclipse.cdt.cross.arc.gnu.assembler.option.include.paths.1566999926" superClass="org.eclipse.cdt.cross.arc.gnu.assembler.option.include.paths" valueType="includePath">
+								<option id="org.eclipse.cdt.cross.arc.gnu.assembler.option.include.paths.1566999926" name="Include paths (-I)" superClass="org.eclipse.cdt.cross.arc.gnu.assembler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Source/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Source/portable/Synopsys/ARC}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Demo/Common/include}&quot;"/>
@@ -36,14 +36,14 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CoreConfig/ARCHS38}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 								</option>
-								<option id="org.eclipse.cdt.cross.arc.gnu.assembler.option.preprocessor.def.1083070368" superClass="org.eclipse.cdt.cross.arc.gnu.assembler.option.preprocessor.def" valueType="definedSymbols">
+								<option id="org.eclipse.cdt.cross.arc.gnu.assembler.option.preprocessor.def.1083070368" name="Defined symbols (-D)" superClass="org.eclipse.cdt.cross.arc.gnu.assembler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="MID_COMMON"/>
 								</option>
 								<inputType id="org.eclipse.cdt.cross.arc.gnu.hs.linux.assembler.base.input.605679901" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.assembler.base.input"/>
 							</tool>
 							<tool id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.compiler.debug.1242351434" name="ARC ELF32 GCC C Compiler" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.compiler.debug">
 								<option id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.optimization.level.729534457" name="Optimization level" superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.optimization.level" value="org.eclipse.cdt.cross.arc.gnu.base.option.optimization.level.none" valueType="enumerated"/>
-								<option id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.include.paths.18304716" superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.include.paths" valueType="includePath">
+								<option id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.include.paths.18304716" name="Include paths (-I)" superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Source/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Source/portable/Synopsys/ARC}&quot;"/>
@@ -51,22 +51,22 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Demo/Common/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Demo/Common/drivers/Synopsys/embARC_BSP}&quot;"/>
 								</option>
-								<option id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.preprocessor.def.864012935" superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.preprocessor.def" valueType="definedSymbols">
+								<option id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.preprocessor.def.864012935" name="Defined symbols (-D)" superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="MID_COMMON"/>
 								</option>
 								<inputType id="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.compiler.base.input.1900131365" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.compiler.base.input"/>
 							</tool>
 							<tool id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.cpp.compiler.debug.2145736006" name="ARC ELF32 GCC C++ Compiler" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.cpp.compiler.debug">
 								<option id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.optimization.level.1596250048" name="Optimization level" superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.optimization.level" value="org.eclipse.cdt.cross.arc.gnu.base.option.optimization.level.none" valueType="enumerated"/>
-								<option id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.preprocessor.def.920952220" superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+								<option id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.preprocessor.def.920952220" name="Defined symbols (-D)" superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="MID_COMMON"/>
 								</option>
 								<inputType id="org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.compiler.base.input.733610431" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.compiler.base.input"/>
 							</tool>
 							<tool id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.linker.debug.1430067517" name="ARC ELF32 GCC C Linker" superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.linker.debug">
-								<option id="org.eclipse.cdt.cross.arc.gnu.c.link.option.scriptfile.1160027407" superClass="org.eclipse.cdt.cross.arc.gnu.c.link.option.scriptfile" value="..\CoreConfig\ARCHS38\arc_core.ld" valueType="string"/>
-								<option id="org.eclipse.cdt.cross.arc.gnu.c.link.option.nostart.1219642773" superClass="org.eclipse.cdt.cross.arc.gnu.c.link.option.nostart" value="true" valueType="boolean"/>
-								<option id="org.eclipse.cdt.cross.arc.gnu.c.link.option.libs.929129381" superClass="org.eclipse.cdt.cross.arc.gnu.c.link.option.libs" valueType="libs">
+								<option id="org.eclipse.cdt.cross.arc.gnu.c.link.option.scriptfile.1160027407" name="Script file (-T)" superClass="org.eclipse.cdt.cross.arc.gnu.c.link.option.scriptfile" value="..\CoreConfig\ARCHS38\arc_core.ld" valueType="string"/>
+								<option id="org.eclipse.cdt.cross.arc.gnu.c.link.option.nostart.1219642773" name="Do not use standard start files (-nostartfiles)" superClass="org.eclipse.cdt.cross.arc.gnu.c.link.option.nostart" value="true" valueType="boolean"/>
+								<option id="org.eclipse.cdt.cross.arc.gnu.c.link.option.libs.929129381" name="Libraries (-l)" superClass="org.eclipse.cdt.cross.arc.gnu.c.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="m"/>
 								</option>
 								<inputType id="org.eclipse.cdt.cross.arc.gnu.c.linker.input.678831155" superClass="org.eclipse.cdt.cross.arc.gnu.c.linker.input">
@@ -83,7 +83,7 @@
 					</folderInfo>
 					<fileInfo id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.debug.1392619847.180530669" name="readme.txt" rcbsApplicability="disable" resourcePath="Demo/Common/Minimal/readme.txt" toolsToInvoke=""/>
 					<sourceEntries>
-						<entry excluding="Source/portable/MemMang/heap_5.c|Source/portable/MemMang/heap_4.c|Source/portable/MemMang/heap_3.c|Source/portable/MemMang/heap_1.c|Source/portable/WizC|Source/portable/Tasking|Source/portable/Softune|Source/portable/SDCC|Source/portable/RVDS|Source/portable/Rowley|Source/portable/Renesas|Source/portable/Paradigm|Source/portable/oWatcom|Source/portable/MSVC-MingW|Source/portable/MPLAB|Source/portable/MikroC|Source/portable/Keil|Source/portable/IAR|Source/portable/GCC|Source/portable/Common|Source/portable/CodeWarrior|Source/portable/CCS|Source/portable/BCC|Demo/Common/Minimal/readme.txt|Demo/Common/Minimal/TimerDemo.c|Demo/Common/Minimal/TaskNotify.c|Demo/Common/Minimal/StaticAllocation.c|Demo/Common/Minimal/sp_flop.c|Demo/Common/Minimal/recmutex.c|Demo/Common/Minimal/QueueSetPolling.c|Demo/Common/Minimal/QueueSet.c|Demo/Common/Minimal/QueueOverwrite.c|Demo/Common/Minimal/QPeek.c|Demo/Common/Minimal/IntSemTest.c|Demo/Common/Minimal/IntQueue.c|Demo/Common/Minimal/GenQTest.c|Demo/Common/Minimal/flash_timer.c|Demo/Common/Minimal/EventGroupsDemo.c|Demo/Common/Minimal/death.c|Demo/Common/Minimal/crhook.c|Demo/Common/Minimal/crflash.c|Demo/Common/Minimal/countsem.c|Demo/Common/Minimal/comtest.c|Demo/Common/Minimal/comtest_strings.c|Demo/Common/Minimal/blocktim.c|Demo/Common/Minimal/AbortDelay.c|Demo/Common/drivers/Synopsys/embARC_BSP/board/emsk|Demo/Common/drivers/ST|Demo/Common/drivers/LuminaryMicro|Demo/Common/drivers/Atmel" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Demo/Common/drivers/Synopsys/embARC_BSP/device/designware|Source/portable/MemMang/heap_5.c|Source/portable/MemMang/heap_4.c|Source/portable/MemMang/heap_3.c|Source/portable/MemMang/heap_1.c|Source/portable/WizC|Source/portable/Tasking|Source/portable/Softune|Source/portable/SDCC|Source/portable/RVDS|Source/portable/Rowley|Source/portable/Renesas|Source/portable/Paradigm|Source/portable/oWatcom|Source/portable/MSVC-MingW|Source/portable/MPLAB|Source/portable/MikroC|Source/portable/Keil|Source/portable/IAR|Source/portable/GCC|Source/portable/Common|Source/portable/CodeWarrior|Source/portable/CCS|Source/portable/BCC|Demo/Common/Minimal/readme.txt|Demo/Common/Minimal/TimerDemo.c|Demo/Common/Minimal/TaskNotify.c|Demo/Common/Minimal/StaticAllocation.c|Demo/Common/Minimal/sp_flop.c|Demo/Common/Minimal/recmutex.c|Demo/Common/Minimal/QueueSetPolling.c|Demo/Common/Minimal/QueueSet.c|Demo/Common/Minimal/QueueOverwrite.c|Demo/Common/Minimal/QPeek.c|Demo/Common/Minimal/IntSemTest.c|Demo/Common/Minimal/IntQueue.c|Demo/Common/Minimal/GenQTest.c|Demo/Common/Minimal/flash_timer.c|Demo/Common/Minimal/EventGroupsDemo.c|Demo/Common/Minimal/death.c|Demo/Common/Minimal/crhook.c|Demo/Common/Minimal/crflash.c|Demo/Common/Minimal/countsem.c|Demo/Common/Minimal/comtest.c|Demo/Common/Minimal/comtest_strings.c|Demo/Common/Minimal/blocktim.c|Demo/Common/Minimal/AbortDelay.c|Demo/Common/drivers/Synopsys/embARC_BSP/board/emsk|Demo/Common/drivers/ST|Demo/Common/drivers/LuminaryMicro|Demo/Common/drivers/Atmel" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

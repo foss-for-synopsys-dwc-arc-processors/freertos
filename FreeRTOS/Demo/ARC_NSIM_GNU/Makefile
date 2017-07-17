@@ -150,7 +150,6 @@ FREERTOS_KERNEL_INC_DIRS = $(FREERTOS_KERNEL_ROOT)/include \
 # Demo C Source files
 ###
 FREERTOS_DEMO_C_SRCS = $(FREERTOS_DEMO_COMMON_ROOT)/Minimal/integer.c \
-			$(FREERTOS_DEMO_COMMON_ROOT)/Minimal/flash.c \
 			$(FREERTOS_DEMO_COMMON_ROOT)/Minimal/PollQ.c \
 			$(FREERTOS_DEMO_COMMON_ROOT)/Minimal/flop.c \
 			$(FREERTOS_DEMO_COMMON_ROOT)/Minimal/semtest.c \

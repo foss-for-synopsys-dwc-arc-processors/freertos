@@ -123,13 +123,14 @@
 
 /* Demo application includes. */
 #include "partest.h"
-#include "flash.h"
 #include "integer.h"
 #include "PollQ.h"
 #include "semtest.h"
 #include "flop.h"
 #include "dynamic.h"
 #include "BlockQ.h"
+
+/* embARC BSP includes */
 #include "inc/embARC_debug.h"
 
 /*-----------------------------------------------------------*/

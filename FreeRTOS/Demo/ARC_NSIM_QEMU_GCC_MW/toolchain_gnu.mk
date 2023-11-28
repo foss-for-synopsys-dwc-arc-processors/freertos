@@ -72,7 +72,8 @@ endif
 
 	## C/ASM/LINK Options
 	COMPILE_OPT	+= $(CCORE_OPT_GNU)   $(ADT_COPT)   $(COMMON_COMPILE_OPT) -std=gnu99
-	ASM_OPT		+= $(ACORE_OPT_GNU)   $(ADT_AOPT)   $(COMMON_COMPILE_OPT) -x assembler-with-cpp
+# ASM_OPT		+= $(ACORE_OPT_GNU)   $(ADT_AOPT)   $(COMMON_COMPILE_OPT) -x assembler-with-cpp
+	ASM_OPT		+= $(ACORE_OPT_GNU)   $(ADT_AOPT)   $(COMMON_COMPILE_OPT)
 # LINK_OPT	+= $(LCORE_OPT_GNU)   $(ADT_LOPT) -Wl,--gc-sections \
 # 			-mno-sdata -nostartfiles $(LMAP_OPTION) -lm -Wl,--script=$(APPL_LINK_FILE)
 	LINK_OPT	+= $(LCORE_OPT_GNU)   $(ADT_LOPT) -Wl,--gc-sections \

@@ -2,7 +2,7 @@ TOOLCHAIN ?= mw
 
 APPL_FULL_NAME ?= $(BUILD_DIR)/RTOSDemo
 
-OPT_OLEVEL = -O2
+# OPT_OLEVEL = -O2
 
 DEBUG ?= 1
 
@@ -72,5 +72,5 @@ nsim :
 	nsimdrv -gdb -port 1234 -p nsim_emt=1 $(NSIMDRV_OPT)
 
 qemu :
-	qemu-system-arc -cpu arcem -M virt -m 8M -nographic -net none -kernel build/RTOSDemo.elf -chardev stdio,id=con,mux=on -serial chardev:con -mon chardev=con,mode=readline \
+	qemu-system-arc64 -cpu hs6x -M virt -m 8M -nographic -net none -kernel build/RTOSDemo.elf -chardev stdio,id=con,mux=on -serial chardev:con -mon chardev=con,mode=readline \
 	-global cpu.firq=false -global cpu.num-irqlevels=15 -global cpu.num-irq=25 -global cpu.ext-irq=20 -global cpu.freq_hz=1000000 -global cpu.timer0=true -global cpu.timer1=true -s -S

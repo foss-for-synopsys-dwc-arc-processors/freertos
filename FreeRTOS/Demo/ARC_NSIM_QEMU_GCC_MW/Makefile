@@ -29,7 +29,6 @@ BUILD_DIR       = build
 RTOS_SOURCE_DIR = $(abspath ../../Source)
 DEMO_SOURCE_DIR = $(abspath ../Common/Minimal)
 
-# SRCS = main.c arc/arc_exception.c arc/board.c arc/arc_timer.c ns16550-virt.c printf-stdarg.c
 SRCS = main.c arc/board.c ns16550-virt.c printf-stdarg.c \
 	$(RTOS_SOURCE_DIR)/event_groups.c \
 	$(RTOS_SOURCE_DIR)/list.c \
@@ -72,5 +71,5 @@ nsim :
 	nsimdrv -gdb -port 1234 -p nsim_emt=1 $(NSIMDRV_OPT)
 
 qemu :
-	qemu-system-arc -cpu arcem -M virt -m 8M -nographic -net none -kernel build/RTOSDemo.elf -chardev stdio,id=con,mux=on -serial chardev:con -mon chardev=con,mode=readline \
+	qemu-system-arc -cpu hs5x -M virt -m 8M -nographic -net none -kernel build/RTOSDemo.elf -chardev stdio,id=con,mux=on -serial chardev:con -mon chardev=con,mode=readline \
 	-global cpu.firq=false -global cpu.num-irqlevels=15 -global cpu.num-irq=25 -global cpu.ext-irq=20 -global cpu.freq_hz=1000000 -global cpu.timer0=true -global cpu.timer1=true -s -S

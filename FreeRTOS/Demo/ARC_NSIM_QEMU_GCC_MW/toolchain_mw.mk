@@ -43,7 +43,7 @@ endif
 	CC	= ccac
 	LD   	= ccac
 
-	MAKE	= gmake
+	MAKE	= make
 	DBG	= mdb
 
 	NSIMDRV	= nsimdrv

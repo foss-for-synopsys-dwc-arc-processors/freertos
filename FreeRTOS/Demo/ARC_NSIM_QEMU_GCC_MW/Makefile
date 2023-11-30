@@ -16,6 +16,13 @@ MAP ?= 1
 
 include ./toolchain_$(TOOLCHAIN).mk
 
+ifeq ($(ARC_CPU), hs5x)
+	QEMU_CPU = hs5x
+else
+	QEMU_CPU = arcem
+endif
+
+
 ALL_DEFINES += -DPLATFORM_EMBARC -DBOARD_NSIM -DCPU_ARC -DFREERTOS_HEAP_SEL=2 \
 	-DHW_VERSION=10 -DconfigGENERATE_RUN_TIME_STATS=1 -D_NSIM_ \
 	-DconfigNUM_THREAD_LOCAL_STORAGE_POINTERS=1 -DconfigUSE_RECURSIVE_MUTEXES=1 $(TOOLCHAIN_DEFINES)
@@ -73,5 +80,5 @@ nsim :
 	nsimdrv -gdb -port 1234 -p nsim_emt=1 $(NSIMDRV_OPT)
 
 qemu :
-	qemu-system-arc -cpu $(ARC_CPU) -M virt -m 8M -nographic -net none -kernel build/RTOSDemo.elf -chardev stdio,id=con,mux=on -serial chardev:con -mon chardev=con,mode=readline \
+	qemu-system-arc -cpu $(QEMU_CPU) -M virt -m 8M -nographic -net none -kernel build/RTOSDemo.elf -chardev stdio,id=con,mux=on -serial chardev:con -mon chardev=con,mode=readline \
 	-global cpu.firq=false -global cpu.num-irqlevels=15 -global cpu.num-irq=25 -global cpu.ext-irq=20 -global cpu.freq_hz=1000000 -global cpu.timer0=true -global cpu.timer1=true -s -S

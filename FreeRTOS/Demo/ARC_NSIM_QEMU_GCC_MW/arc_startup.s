@@ -50,15 +50,15 @@ _arc_reset_stage1:
 /* STAGE 2: init necessary registers */
 
 _arc_reset_stage2:
-	mov	r0, 0
+	movl	r0, 0
 
 /* interrupt related init */
-	sr	r0, [AUX_IRQ_ACT]
-	sr	r0, [AUX_IRQ_CTRL]
-	sr	r0, [AUX_IRQ_HINT]
+	srl	r0, [AUX_IRQ_ACT]
+	srl	r0, [AUX_IRQ_CTRL]
+	srl	r0, [AUX_IRQ_HINT]
 
 /* use the new vector table to replace the old one */
-	sr	exc_entry_table, [AUX_INT_VECT_BASE]
+	srl	exc_entry_table, [AUX_INT_VECT_BASE]
 #ifdef __GNU__
 	mov	gp, __SDATA_BEGIN__	/* init small-data base register */
 #else

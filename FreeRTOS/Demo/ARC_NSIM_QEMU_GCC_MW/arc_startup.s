@@ -58,37 +58,39 @@ _arc_reset_stage2:
 	srl	r0, [AUX_IRQ_HINT]
 
 /* use the new vector table to replace the old one */
-	srl	exc_entry_table, [AUX_INT_VECT_BASE]
+	movl r0, exc_entry_table
+	srl  r0, [AUX_INT_VECT_BASE]
+	movl r0, 0
 #ifdef __GNU__
-	mov	gp, __SDATA_BEGIN__	/* init small-data base register */
+	movl	gp, __SDATA_BEGIN__	/* init small-data base register */
 #else
-	mov	gp, _f_sdata	/* init small-data base register */
+	movl	gp, _f_sdata	/* init small-data base register */
 #endif
-	mov	fp, 0		/* init fp register */
-	mov	sp, _e_stack	/* init stack pointer */
+	movl	fp, 0		/* init fp register */
+	movl	sp, _e_stack	/* init stack pointer */
 
 _arc_reset_stage3:
 _s3_copy_data:
-	mov	r0, _f_data
-	mov	r1, _load_addr_data
-	cmp	r0, r1
+	movl	r0, _f_data
+	movl	r1, _load_addr_data
+	cmpl	r0, r1
 	jeq	_s3_clear_bss
 
-	mov	r3, _e_data
+	movl	r3, _e_data
 _s3_copy_data_loop:
-	ld.ab	r2, [r1, 4]
-	st.ab	r2, [r0, 4]
-	cmp	r0, r3
+	ldl.ab	r2, [r1, 4]
+	stl.ab	r2, [r0, 4]
+	cmpl	r0, r3
 	jlt	_s3_copy_data_loop
 _s3_clear_bss:
-	mov	r0, _f_bss
-	mov	r1, _e_bss
-	cmp	r0, r1
+	movl	r0, _f_bss
+	movl	r1, _e_bss
+	cmpl	r0, r1
 	jge	_arc_reset_call_main
-	mov	r2, 0
+	movl	r2, 0
 _s3_clear_bss_loop:
-	st.ab	r2, [r0, 4]
-	cmp	r0, r1
+	stl.ab	r2, [r0, 4]
+	cmpl	r0, r1
 	jlt	_s3_clear_bss_loop
 
 /* STAGE 3: go to main */

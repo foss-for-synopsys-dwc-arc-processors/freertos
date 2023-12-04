@@ -32,7 +32,7 @@ Build
 ```
  * Default cpu in each case is ARCv2 EM and is equivalent to setting ARC_CPU=arcem for the make command
  * Change cpu target to ARCv3 HS5x with ARC_CPU=hs5x
-```
+
 Debug
 ====================
 
@@ -58,10 +58,9 @@ Then open another terminal and run GNU debugger by following commands:
     $ make TOOLCHAIN=gnu debug
 ```
 Type c to continue and see the output.
-```
+
  * Default cpu in each case is ARCv2 EM and is equivalent to setting ARC_CPU=arcem for the make command
  * Change cpu target to ARCv3 HS5x with ARC_CPU=hs5x
-```
 
 Sample Output
 =============

@@ -20,7 +20,12 @@ endif
 
 TOOLCHAIN_DEFINES += $(HEAP_DEFINES) $(STACK_DEFINES) -D__GNU__
 
-NSIMDRV_OPT = -propsfile nsim.props
+ifeq ($(ARC_CPU), hs5x)
+	NSIMDRV_OPT = -propsfile nsim_hs5x.props
+else
+  ## ARC_CPU == arcem
+	NSIMDRV_OPT = -propsfile nsim.props
+endif
 
 DBG_HW_FLAGS += -ex "target remote localhost:1234" -ex "load"
 

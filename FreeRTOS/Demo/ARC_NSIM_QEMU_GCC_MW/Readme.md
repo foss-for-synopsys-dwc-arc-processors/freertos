@@ -1,4 +1,4 @@
-FreeRTOS Demo for ARC EM machine emulated on QEMU/nSIM
+FreeRTOS Demo for ARCv2 EM and ARCv3 ARC HS5x machine emulated on QEMU/nSIM
 ====================
 
 Overview
@@ -10,7 +10,7 @@ Requirements
 ====================
  * Toolchains:
 
-    Metaware (tested version 2022.09) [here](https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware) or arc_gnu [here](https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases/) (tested version 2022.09)
+    Metaware (tested version 2023.09) [here](https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware) or arc_gnu [here](https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases/) (tested version 2023.03)
 
  * Simulators:
 
@@ -29,6 +29,9 @@ Build
 ```
     $ cd <FreeRTOS_root>/FreeRTOS/Demo/ARC_NSIM_QEMU_GCC_MW
     $ make TOOLCHAIN=gnu
+```
+ * Default cpu in each case is ARCv2 EM and is equivalent to setting ARC_CPU=arcem for the make command
+ * Change cpu target to ARCv3 HS5x with ARC_CPU=hs5x
 ```
 Debug
 ====================
@@ -55,6 +58,10 @@ Then open another terminal and run GNU debugger by following commands:
     $ make TOOLCHAIN=gnu debug
 ```
 Type c to continue and see the output.
+```
+ * Default cpu in each case is ARCv2 EM and is equivalent to setting ARC_CPU=arcem for the make command
+ * Change cpu target to ARCv3 HS5x with ARC_CPU=hs5x
+```
 
 Sample Output
 =============

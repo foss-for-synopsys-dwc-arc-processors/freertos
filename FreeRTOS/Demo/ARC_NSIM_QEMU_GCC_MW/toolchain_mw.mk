@@ -20,11 +20,23 @@ endif
 
 TOOLCHAIN_DEFINES += $(HEAP_DEFINES) $(STACK_DEFINES) -D__MW__
 
-DBG_HW_FLAGS += @mdb_arg.props
+ifeq ($(ARC_CPU), hs5x)
+	DBG_HW_FLAGS += @mdb_arg_hs5x.props
+else
+	## ARC_CPU == arcem
+	DBG_HW_FLAGS += @mdb_arg.props
+endif
 
-CCORE_OPT_MW += -arcv2em -core3 -HL -Xcode_density -Xdiv_rem=radix2 -Xswap -Xbitscan -Xmpy_option=mpyd -Xshift_assist \
-	-Xbarrel_shifter -Xdsp2 -Xdsp_complex -Xdsp_divsqrt=radix2 -Xdsp_itu -Xdsp_accshift=full -Xagu_large -Xxy -Xfpus_div \
-	-Xfpu_mac -Xfpuda -Xfpus_mpy_slow -Xfpus_div_slow -Xbitstream -Xtimer0 -Xtimer1 -Xstack_check -Hccm -Xdmac
+ifeq ($(ARC_CPU), hs5x)
+	CCORE_OPT_MW += -av3hs -core0 -HL -Xcode_density -Xswap -Xbitscan -Xmpy_option=mpyd -Xshift_assist \
+		-Xbarrel_shifter -Xdsp_complex -Xdsp_divsqrt=radix4 -Xdsp_itu -Xdsp_accshift=full -Xagu_small \
+		-Xtimer0 -Xtimer1 -Xstack_check -Hccm -Xdmac
+else
+	## ARC_CPU == arcem
+	CCORE_OPT_MW += -arcv2em -core3 -HL -Xcode_density -Xdiv_rem=radix2 -Xswap -Xbitscan -Xmpy_option=mpyd -Xshift_assist \
+		-Xbarrel_shifter -Xdsp2 -Xdsp_complex -Xdsp_divsqrt=radix2 -Xdsp_itu -Xdsp_accshift=full -Xagu_large -Xxy -Xfpus_div \
+		-Xfpu_mac -Xfpuda -Xfpus_mpy_slow -Xfpus_div_slow -Xbitstream -Xtimer0 -Xtimer1 -Xstack_check -Hccm -Xdmac
+endif
 
 ASM_OPT += $(CCORE_OPT_MW)
 

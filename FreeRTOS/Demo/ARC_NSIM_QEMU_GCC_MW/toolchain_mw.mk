@@ -29,7 +29,7 @@ endif
 
 ifeq ($(ARC_CPU), hs5x)
 	CCORE_OPT_MW += -av3hs -core0 -HL -Xcode_density -Xswap -Xbitscan -Xmpy_option=mpyd -Xshift_assist \
-		-Xbarrel_shifter -Xdsp_complex -Xdsp_divsqrt=radix2 -Xdsp_itu -Xdsp_accshift=full -Xagu_small \
+		-Xbarrel_shifter -Xdsp_complex -Xdsp_divsqrt=radix4 -Xdsp_itu -Xdsp_accshift=full -Xagu_small \
 		-Xtimer0 -Xtimer1 -Xstack_check -Hccm -Xdmac
 else
 	## ARC_CPU == arcem

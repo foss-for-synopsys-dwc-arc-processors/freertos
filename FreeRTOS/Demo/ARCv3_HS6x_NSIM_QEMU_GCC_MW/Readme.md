@@ -1,4 +1,4 @@
-FreeRTOS Demo for ARC EM machine emulated on QEMU/nSIM
+FreeRTOS Demo for ARCv3 HS6x machine emulated on QEMU/nSIM
 ====================
 
 Overview
@@ -10,7 +10,7 @@ Requirements
 ====================
  * Toolchains:
 
-    Metaware (tested version 2022.09) [here](https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware) or arc_gnu [here](https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases/) (tested version 2022.09)
+    Metaware (tested version 2022.09) [here](https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware) or arc_gnu [here](https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases/) (tested version 2023.09.rc2)
 
  * Simulators:
 
@@ -22,12 +22,12 @@ Build
 
  * For Metaware toolchain:
 ```
-    $ cd <FreeRTOS_root>/FreeRTOS/Demo/ARC_NSIM_QEMU_GCC_MW
+    $ cd <FreeRTOS_root>/FreeRTOS/Demo/ARCv3_HS6x_NSIM_QEMU_GCC_MW
     $ make
 ```
  * For arc_gnu toolchain:
 ```
-    $ cd <FreeRTOS_root>/FreeRTOS/Demo/ARC_NSIM_QEMU_GCC_MW
+    $ cd <FreeRTOS_root>/FreeRTOS/Demo/ARCv3_HS6x_NSIM_QEMU_GCC_MW
     $ make TOOLCHAIN=gnu
 ```
 Debug
@@ -37,7 +37,7 @@ This example outputs via console through Metaware or MDB debugger.
 
  * For Metaware toolchain:
 ```
-    $ cd <FreeRTOS_root>/FreeRTOS/Demo/ARC_NSIM_QEMU_GCC_MW
+    $ cd <FreeRTOS_root>/FreeRTOS/Demo/ARCv3_HS6x_NSIM_QEMU_GCC_MW
     $ make debug
 ```
 Use nSIM simulator and debug in MetaWare IDE.
@@ -46,12 +46,12 @@ Use nSIM simulator and debug in MetaWare IDE.
 
 The following step is to launch nSIM simulator (to use QEMU, please replace nsim with qemu) and wait for the connection from gdb.
 ```
-    $ cd <FreeRTOS_root>/FreeRTOS/Demo/ARC_NSIM_QEMU_GCC_MW
+    $ cd <FreeRTOS_root>/FreeRTOS/Demo/ARCv3_HS6x_NSIM_QEMU_GCC_MW
     $ make TOOLCHAIN=gnu nsim
 ```
 Then open another terminal and run GNU debugger by following commands:
 ```
-    $ cd <FreeRTOS_root>/FreeRTOS/Demo/ARC_NSIM_QEMU_GCC_MW
+    $ cd <FreeRTOS_root>/FreeRTOS/Demo/ARCv3_HS6x_NSIM_QEMU_GCC_MW
     $ make TOOLCHAIN=gnu debug
 ```
 Type c to continue and see the output.

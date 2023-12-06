@@ -119,7 +119,7 @@
 #define ARC_FEATURE_INTERRUPTS_PRESENT  1
 
 /** FIRQ_OPTION configuration option, 1 for enabled, 0 for disabled */
-#define ARC_FEATURE_FIRQ                1
+#define ARC_FEATURE_FIRQ                0
 
 /** The number of interrupts */
 #define NUM_EXC_INT                     20

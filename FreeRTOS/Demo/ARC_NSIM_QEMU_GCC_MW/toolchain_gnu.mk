@@ -24,10 +24,7 @@ NSIMDRV_OPT = -propsfile nsim.props
 
 DBG_HW_FLAGS += -ex "target remote localhost:1234" -ex "load"
 
-# CCORE_OPT_GNU += -mcpu=em4_dmips -mlittle-endian -mcode-density -mdiv-rem -mswap -mnorm \
-# 	-mmpy-option=6 -mbarrel-shifter --param l1-cache-size=16384 --param l1-cache-line-size=32
-CCORE_OPT_GNU += -mcpu=hs6x -mcode-density -mdiv-rem \
-	--param l1-cache-size=16384 --param l1-cache-line-size=32
+CCORE_OPT_GNU += -mcpu=hs6x -mcode-density -mdiv-rem --param l1-cache-size=16384 --param l1-cache-line-size=32
 
 ACORE_OPT_GNU += $(CCORE_OPT_GNU)
 
@@ -66,23 +63,19 @@ endif
 ##
 	## Common Options
 	MKDEP_OPT	= -MMD -MT $@ -MF $@.d
-# COMMON_COMPILE_OPT = -ffunction-sections -fdata-sections -mno-sdata
 	COMMON_COMPILE_OPT = -ffunction-sections -fdata-sections \
 			$(OPT_OLEVEL) $(CDEBUG_OPTION) $(ALL_DEFINES) $(ALL_INCLUDES) $(MKDEP_OPT)
 
 	## C/ASM/LINK Options
 	COMPILE_OPT	+= $(CCORE_OPT_GNU)   $(ADT_COPT)   $(COMMON_COMPILE_OPT) -std=gnu99
-# ASM_OPT		+= $(ACORE_OPT_GNU)   $(ADT_AOPT)   $(COMMON_COMPILE_OPT) -x assembler-with-cpp
-	ASM_OPT		+= $(ACORE_OPT_GNU)   $(ADT_AOPT)   $(COMMON_COMPILE_OPT)
-# LINK_OPT	+= $(LCORE_OPT_GNU)   $(ADT_LOPT) -Wl,--gc-sections \
-# 			-mno-sdata -nostartfiles $(LMAP_OPTION) -lm -Wl,--script=$(APPL_LINK_FILE)
-	LINK_OPT	+= $(LCORE_OPT_GNU)   $(ADT_LOPT) -Wl,--gc-sections \
-				-nostartfiles $(LMAP_OPTION) -lm -Wl,--script=$(APPL_LINK_FILE)
+	ASM_OPT		+= $(ACORE_OPT_GNU)   $(ADT_AOPT)   $(COMMON_COMPILE_OPT) -x assembler-with-cpp
+	LINK_OPT	+= $(LCORE_OPT_GNU)   $(ADT_LOPT) -Wl,--gc-sections -nostartfiles $(LMAP_OPTION) -lm -Wl,--script=$(APPL_LINK_FILE)
 
 	## Link File Generation Options
-	LINK_FILE_OPT	+= -x assembler-wit
+	LINK_FILE_OPT	+= -x assembler-with-cpp $(ALL_INCLUDES) -E -P -nostdinc -undef -D__GNU__
 	LINK_FILE_DEPOPT = $(LINK_FILE_OPT) -DENABLE_GENERATE_DEPENDCY_FILE $(MKDEP_OPT)
 
 	LD_START_GROUPLIB	= -Wl,--start-group
 	LD_SYSTEMLIBS		= -lm -lc -lgcc
 	LD_END_GROUPLIB		= -Wl,--end-group
+	

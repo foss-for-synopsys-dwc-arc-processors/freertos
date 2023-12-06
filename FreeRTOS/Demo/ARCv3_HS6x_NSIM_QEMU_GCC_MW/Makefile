@@ -20,7 +20,7 @@ ALL_DEFINES += -DPLATFORM_EMBARC -DBOARD_NSIM -DCPU_ARC -DFREERTOS_HEAP_SEL=2 \
 
 ALL_INCLUDES += 	-I . -I arc/ -I ../Common/include \
 	-I $(RTOS_SOURCE_DIR)/include \
-	-I $(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARC_EM_HS
+	-I $(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x
 
 LINKER_SCRIPT_FILE ?= linker_template_$(TOOLCHAIN).ld
 APPL_LINK_FILE = $(BUILD_DIR)/linker_$(TOOLCHAIN).ldf
@@ -38,13 +38,13 @@ SRCS = main.c arc/board.c ns16550-virt.c printf-stdarg.c \
 	$(RTOS_SOURCE_DIR)/tasks.c \
 	$(RTOS_SOURCE_DIR)/timers.c \
 	$(RTOS_SOURCE_DIR)/portable/MemMang/heap_4.c \
-	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARC_EM_HS/port.c \
-	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARC_EM_HS/arc_freertos_exceptions.c \
-	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARC_EM_HS/arc/arc_exception.c \
-	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARC_EM_HS/arc/arc_timer.c
+	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/port.c \
+	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/arc_freertos_exceptions.c \
+	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/arc/arc_exception.c \
+	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/arc/arc_timer.c
 
 ASMS = arc_startup.s \
-	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARC_EM_HS/arc_support.s
+	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/arc_support.s
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o) $(ASMS:%.s=$(BUILD_DIR)/%.o)
 

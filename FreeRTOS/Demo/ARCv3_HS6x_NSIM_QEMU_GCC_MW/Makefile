@@ -29,7 +29,6 @@ BUILD_DIR       = build
 RTOS_SOURCE_DIR = $(abspath ../../Source)
 DEMO_SOURCE_DIR = $(abspath ../Common/Minimal)
 
-# SRCS = main.c arc/arc_exception.c arc/board.c arc/arc_timer.c ns16550-virt.c printf-stdarg.c
 SRCS = main.c arc/board.c ns16550-virt.c printf-stdarg.c \
 	$(RTOS_SOURCE_DIR)/event_groups.c \
 	$(RTOS_SOURCE_DIR)/list.c \

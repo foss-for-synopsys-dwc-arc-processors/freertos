@@ -22,7 +22,7 @@ TOOLCHAIN_DEFINES += $(HEAP_DEFINES) $(STACK_DEFINES) -D__MW__
 
 DBG_HW_FLAGS += @mdb_arg.props
 
-CCORE_OPT_MW += -arcv2em -core3 -HL -Xcode_density -Xdiv_rem=radix2 -Xswap -Xbitscan -Xmpy_option=mpyd -Xshift_assist \
+CCORE_OPT_MW += -arc64 -core0 -HL -Xcode_density -Xdiv_rem=radix2 -Xswap -Xbitscan -Xmpy_option=mpyd -Xshift_assist \
 	-Xbarrel_shifter -Xdsp2 -Xdsp_complex -Xdsp_divsqrt=radix2 -Xdsp_itu -Xdsp_accshift=full -Xagu_large -Xxy -Xfpus_div \
 	-Xfpu_mac -Xfpuda -Xfpus_mpy_slow -Xfpus_div_slow -Xbitstream -Xtimer0 -Xtimer1 -Xstack_check -Hccm -Xdmac
 

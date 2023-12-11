@@ -1,7 +1,9 @@
     nsim_mem-dev=uart0,kind=dwuart,base=0xf0000000,irq=24
     nsim_isa_family=av3hs
-    nsim_isa_core=0
-    arcver=0x0
+    nsim_isa_core=5
+    arcver=0x6
+    nsim_cluster_use_num_cores=1
+    nsim_cluster_num_cores=2
     nsim_isa_rgf_num_banks=2
     nsim_isa_rgf_banked_regs=32
     nsim_isa_rgf_num_regs=32

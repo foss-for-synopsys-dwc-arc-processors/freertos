@@ -22,6 +22,7 @@
 * See http://www.freertos.org/a00110.html.
 *----------------------------------------------------------*/
 
+#define configNUMBER_OF_CORES                   2
 #define configRUN_MULTIPLE_PRIORITIES           1
 #define configUSE_CORE_AFFINITY                 1
 

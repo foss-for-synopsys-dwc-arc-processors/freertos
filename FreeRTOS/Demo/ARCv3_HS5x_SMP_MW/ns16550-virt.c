@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Synopsys
+ * Copyright (c) 2024 Synopsys
  *
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -23,15 +23,17 @@ static void vOutNS16550( uintptr_t address, unsigned char c )
 
 void vSendString( const char *s )
 {
+	UBaseType_t uxSavedInterruptStatus = portENTER_CRITICAL_FROM_ISR();
+	vPortGetSpinLock(configSEND_STRING_LOCK_ID);
+
 	size_t i;
 	uintptr_t addr = NS16550_ADDR;
-
-	portENTER_CRITICAL();
 
 	for (i = 0; i < strlen(s); i++) {
 		vOutNS16550( addr, s[i] );
 	}
 	vOutNS16550( addr, '\n' );
 
-	portEXIT_CRITICAL();
+	vPortReleaseSpinLock(configSEND_STRING_LOCK_ID);
+	portEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
 }

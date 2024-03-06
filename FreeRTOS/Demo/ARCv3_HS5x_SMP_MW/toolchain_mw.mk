@@ -20,23 +20,18 @@ endif
 
 TOOLCHAIN_DEFINES += $(HEAP_DEFINES) $(STACK_DEFINES) -D__MW__
 
-ifeq ($(ARC_CPU), hs5x)
-	DBG_HW_FLAGS += @mdb_arg_hs5x.props
-else
-	## ARC_CPU == arcem
-	DBG_HW_FLAGS += @mdb_arg.props
-endif
+DBG_HW_FLAGS_COMMON += -nogoifmain -toggle=include_local_symbols=1 -cmpd=soc -nsim @mdb_arg_hs5x.props
+DBG_HW_FLAGS_CORE0 += -pset=1 -psetname=core0 $(DBG_HW_FLAGS_COMMON)
+DBG_HW_FLAGS_CORE1 += -pset=2 -psetname=core1 -prop=download=2 $(DBG_HW_FLAGS_COMMON)
+DBG_HW_FLAGS_CORE2 += -pset=3 -psetname=core2 -prop=download=2 $(DBG_HW_FLAGS_COMMON)
+DBG_HW_FLAGS_CORE3 += -pset=4 -psetname=core3 -prop=download=2 $(DBG_HW_FLAGS_COMMON)
 
-ifeq ($(ARC_CPU), hs5x)
-	CCORE_OPT_MW += -av3hs -core0 -HL -Xcode_density -Xswap -Xbitscan -Xmpy_option=mpyd -Xshift_assist \
-		-Xbarrel_shifter -Xdsp_complex -Xdsp_divsqrt=radix4 -Xdsp_itu -Xdsp_accshift=full -Xagu_small \
-		-Xtimer0 -Xtimer1 -Xstack_check -Hccm -Xdmac
-else
-	## ARC_CPU == arcem
-	CCORE_OPT_MW += -arcv2em -core3 -HL -Xcode_density -Xdiv_rem=radix2 -Xswap -Xbitscan -Xmpy_option=mpyd -Xshift_assist \
-		-Xbarrel_shifter -Xdsp2 -Xdsp_complex -Xdsp_divsqrt=radix2 -Xdsp_itu -Xdsp_accshift=full -Xagu_large -Xxy -Xfpus_div \
-		-Xfpu_mac -Xfpuda -Xfpus_mpy_slow -Xfpus_div_slow -Xbitstream -Xtimer0 -Xtimer1 -Xstack_check -Hccm -Xdmac
-endif
+DBG_HW_FLAGS_2_CORES += -multifiles=core0,core1 -cmpd=soc -OKN
+DBG_HW_FLAGS_4_CORES += -multifiles=core0,core1,core2,core3 -cmpd=soc -OKN
+
+CCORE_OPT_MW += -av3hs -core0 -HL -Xcode_density -Xswap -Xbitscan -Xmpy_option=mpyd -Xshift_assist \
+	-Xbarrel_shifter -Xdsp_complex -Xdsp_divsqrt=radix4 -Xdsp_itu -Xdsp_accshift=full -Xagu_small \
+	-Xtimer0 -Xtimer1 -Xstack_check -Hccm -Xdmac
 
 ASM_OPT += $(CCORE_OPT_MW)
 
@@ -52,10 +47,10 @@ MW_TOOLCHAIN_PREFIX := $(wildcard $(MW_TOOLCHAIN_PREFIX))
 endif
 
 ## METAWARE TOOLCHAIN TOOLS NAME DEFINITIONS ##
-	CC	= ccac
-	LD   	= ccac
+	CC = ccac
+	LD = ccac
 
-	MAKE	= make
+	MAKE = make
 	DBG	= mdb
 
 	NSIMDRV	= nsimdrv

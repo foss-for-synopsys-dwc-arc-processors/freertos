@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Synopsys
+ * Copyright (c) 2024 Synopsys
  *
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -9,7 +9,6 @@
 
 #include <stdio.h>
 #include "ns16550-virt.h"
-#include "portmacro.h"
 /*-----------------------------------------------------------
 * Application specific definitions.
 *
@@ -22,13 +21,22 @@
 * See http://www.freertos.org/a00110.html.
 *----------------------------------------------------------*/
 
-#define configNUMBER_OF_CORES                   2
+/* For SMP */
+#define configNUMBER_OF_CORES                   4
+
+#define configNUM_USER_SPINLOCKS                1     /* portmacro.h defines portNUM_SPINLOCKS, the total number of locks available including user locks */
+#define configSEND_STRING_LOCK_ID               2     /* Task (ID=0) & ISR (ID=1) locks are defined in portmacro.h */
+
+/* portmacro.h needs to know configNUMBER_OF_CORES and configNUMBER_OF_USER_LOCKS */
+#include "portmacro.h"
+
 #define configRUN_MULTIPLE_PRIORITIES           1
 #define configUSE_CORE_AFFINITY                 1
+#define configUSE_PASSIVE_IDLE_HOOK             0
 
 #define configUSE_PREEMPTION                    1
 #define configUSE_IDLE_HOOK                     0
-#define configUSE_TICK_HOOK                     1
+#define configUSE_TICK_HOOK                     0
 #define configCPU_CLOCK_HZ                      (( unsigned long ) 1000000)
 #define configTICK_RATE_HZ                      (( TickType_t ) 1000)
 #define configMAX_PRIORITIES                    (4)
@@ -40,11 +48,12 @@
 #define configIDLE_SHOULD_YIELD                 1
 #define configUSE_MUTEXES                       1
 
+
 /* Software timer related definitions. */
-#define configUSE_TIMERS 1
-#define configTIMER_TASK_PRIORITY ( configMAX_PRIORITIES - 1 )
-#define configTIMER_QUEUE_LENGTH 5
-#define configTIMER_TASK_STACK_DEPTH ( configMINIMAL_STACK_SIZE * 2 )
+#define configUSE_TIMERS                        1
+#define configTIMER_TASK_PRIORITY               ( configMAX_PRIORITIES - 1 )
+#define configTIMER_QUEUE_LENGTH                5
+#define configTIMER_TASK_STACK_DEPTH            ( configMINIMAL_STACK_SIZE * 2 )
 
 /* Co-routine definitions. */
 #define configUSE_CO_ROUTINES                   0

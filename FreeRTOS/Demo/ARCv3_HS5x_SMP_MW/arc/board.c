@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Synopsys
+ * Copyright (c) 2024 Synopsys
  *
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -7,6 +7,7 @@
 #include "arc/arc.h"
 #include "arc/arc_timer.h"
 #include "arc/arc_exception.h"
+#include "arc/arconnect.h"
 #include "board.h"
 #include <stdint.h>
 #include <stddef.h>
@@ -85,6 +86,11 @@ static void board_timer_init(void)
 
 static TaskHandle_t task_handle_main;
 
+/* exception stacks for each core */
+#define EXC_STACKSIZE 2048
+char exc_stacks[EXC_STACKSIZE*configNUMBER_OF_CORES];
+char *core_exc_stack[configNUMBER_OF_CORES];
+
 static void task_main(void)
 {
 	main();
@@ -93,12 +99,21 @@ static void task_main(void)
 	}
 }
 
+static void wait_for_irq(void)
+{
+	arc_unlock();
+	while (true) {}
+}
+
 __attribute__((weak)) void platform_main(void)
 {
 	os_hal_exc_init();
 
-	xTaskCreate((TaskFunction_t)task_main, "main", TASK_STACK_SIZE_MAIN,
-			NULL, TASK_PRI_MAIN, &task_handle_main);
+	xTaskCreate(
+		(TaskFunction_t) task_main, "main", TASK_STACK_SIZE_MAIN,
+		NULL, TASK_PRI_MAIN, &task_handle_main
+	);
+
 	// vTaskStartScheduler() Will not return unless a task calls vTaskEndScheduler
 	vTaskStartScheduler();
 }
@@ -108,12 +123,30 @@ __attribute__((weak)) void board_main(void)
 	/* init core level interrupt & exception management */
 	exc_int_init();
 
+	/* init inter-core interrupt */
+	int_handler_install(ARCONNECT_INTRPT_LINE, vPortArconnectIciHandler);
+	int_enable(ARCONNECT_INTRPT_LINE);
+
 	/* necessary board level init */
 	arc_timer_init();
-	/* Initialise bare-metal board timer and interrupt */
-	board_timer_init();
-	/* platform (e.g RTOS, baremetal)level init */
-	platform_main();
+
+	/* Initialise spinlocks to no owners */
+	vPortInitSpinLock();
+
+	uint32_t arcId = arconnect_get_core_id();
+
+	if (arcId == 0) {
+		/* Only one core starts timer for vKernelTick and starts the Task Scheduler */
+		/* Initialise bare-metal board timer and interrupt */
+		board_timer_init();
+		
+		/* Start FreeRTOS task scheduler */
+		/* platform (e.g RTOS, baremetal) level init */
+		platform_main();
+	} else {
+		/* Other cores wait until interrupted by the FreeRTOS task scheduler */
+		wait_for_irq();
+	}
 }
 
 /**

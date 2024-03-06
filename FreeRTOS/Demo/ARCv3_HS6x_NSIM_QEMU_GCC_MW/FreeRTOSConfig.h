@@ -21,9 +21,16 @@
 * See http://www.freertos.org/a00110.html.
 *----------------------------------------------------------*/
 
+/* Acceptable values for configTICK_TYPE_WIDTH_IN_BITS. */
+/* Defined in FreeRTOS/FreeRTOS/Test/CMock/tasks/tasks_freertos/FreeRTOS.h but not visible here*/
+#define TICK_TYPE_WIDTH_16_BITS                 0
+#define TICK_TYPE_WIDTH_32_BITS                 1
+#define TICK_TYPE_WIDTH_64_BITS                 2
+
+#define configUSE_16_BIT_TICKS                  0
 #define configTICK_TYPE_WIDTH_IN_BITS           TICK_TYPE_WIDTH_64_BITS
 
-// portmacro.h defines TickType_t which needs to know configTICK_TYPE_WIDTH_IN_BITS
+/* portmacro.h defines TickType_t which needs to know configTICK_TYPE_WIDTH_IN_BITS */
 #include "portmacro.h"
 
 #define configUSE_PREEMPTION                    1

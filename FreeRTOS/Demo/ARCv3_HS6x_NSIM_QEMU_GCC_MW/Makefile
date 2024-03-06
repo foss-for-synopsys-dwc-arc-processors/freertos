@@ -12,38 +12,45 @@ STACKSZ ?= 2048
 
 MAP ?= 1
 
+# If Metaware libraries were rebuilt for HS6x, then define MW_HS6X_LIB. For example:
+# 	buildlib -buildlib_name hs68_full_freertos -tcf=hs68_full.tcf -Ml -buildlib_dir /path/to/lib/
+# MW_HS6X_LIB = /path/to/lib/hs68_full_freertos
+MW_HS6X_LIB = 
+
 include ./toolchain_$(TOOLCHAIN).mk
 
-ALL_DEFINES += -DPLATFORM_EMBARC -DBOARD_NSIM -DCPU_ARC -DFREERTOS_HEAP_SEL=2 \
-	-DHW_VERSION=10 -DconfigGENERATE_RUN_TIME_STATS=1 -D_NSIM_ \
-	-DconfigNUM_THREAD_LOCAL_STORAGE_POINTERS=1 -DconfigUSE_RECURSIVE_MUTEXES=1 $(TOOLCHAIN_DEFINES)
+# RTOS_SOURCE_DIR = $(abspath ../../Source)
+RTOS_SOURCE_DIR = $(abspath ../../../../FreeRTOS-Kernel)
 
-ALL_INCLUDES += 	-I . -I arc/ -I ../Common/include \
-	-I $(RTOS_SOURCE_DIR)/include \
-	-I $(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x
+ALL_DEFINES += -DPLATFORM_EMBARC -DBOARD_NSIM -DCPU_ARC -DFREERTOS_HEAP_SEL=2 \
+	             -DHW_VERSION=10 -DconfigGENERATE_RUN_TIME_STATS=1 -D_NSIM_ \
+	             -DconfigNUM_THREAD_LOCAL_STORAGE_POINTERS=1 -DconfigUSE_RECURSIVE_MUTEXES=1 $(TOOLCHAIN_DEFINES)
+
+ALL_INCLUDES += -I . -I arc/ -I ../Common/include \
+	              -I $(RTOS_SOURCE_DIR)/include \
+	              -I $(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x
 
 LINKER_SCRIPT_FILE ?= linker_template_$(TOOLCHAIN).ld
 APPL_LINK_FILE = $(BUILD_DIR)/linker_$(TOOLCHAIN).ldf
 
-BUILD_DIR       = build
-RTOS_SOURCE_DIR = $(abspath ../../Source)
+BUILD_DIR = build
 DEMO_SOURCE_DIR = $(abspath ../Common/Minimal)
 
 SRCS = main.c arc/board.c ns16550-virt.c printf-stdarg.c \
-	$(RTOS_SOURCE_DIR)/event_groups.c \
-	$(RTOS_SOURCE_DIR)/list.c \
-	$(RTOS_SOURCE_DIR)/queue.c \
-	$(RTOS_SOURCE_DIR)/stream_buffer.c \
-	$(RTOS_SOURCE_DIR)/tasks.c \
-	$(RTOS_SOURCE_DIR)/timers.c \
-	$(RTOS_SOURCE_DIR)/portable/MemMang/heap_4.c \
-	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/port.c \
-	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/arc_freertos_exceptions.c \
-	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/arc/arc_exception.c \
-	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/arc/arc_timer.c
+	     $(RTOS_SOURCE_DIR)/event_groups.c \
+	     $(RTOS_SOURCE_DIR)/list.c \
+	     $(RTOS_SOURCE_DIR)/queue.c \
+	     $(RTOS_SOURCE_DIR)/stream_buffer.c \
+	     $(RTOS_SOURCE_DIR)/tasks.c \
+	     $(RTOS_SOURCE_DIR)/timers.c \
+	     $(RTOS_SOURCE_DIR)/portable/MemMang/heap_4.c \
+	     $(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/port.c \
+	     $(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/arc_freertos_exceptions.c \
+	     $(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/arc/arc_exception.c \
+	     $(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/arc/arc_timer.c
 
 ASMS = arc_startup.s \
-	$(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/arc_support.s
+	     $(RTOS_SOURCE_DIR)/portable/ThirdParty/GCC/ARCv3_HS6x/arc_support.s
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o) $(ASMS:%.s=$(BUILD_DIR)/%.o)
 

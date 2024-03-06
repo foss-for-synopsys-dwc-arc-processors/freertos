@@ -4,7 +4,12 @@ FreeRTOS Demo for ARCv3 HS6x machine emulated on QEMU/nSIM
 Overview
 ====================
  This example demonstrates basic FreeRTOS task usage, using queue and semaphore to communicate.
- Note: this DEMO only supports TIMER0 and doesn't support dynamic memory management.
+ Note 1: this DEMO only supports TIMER0 and doesn't support dynamic memory management.
+ Note 2: If Metaware libraries were rebuilt for HS6x, then in Makefile define MW_HS6X_LIB. For example:
+    buildlib -buildlib_name hs68_full_freertos -tcf=hs68_full.tcf -Ml -buildlib_dir /path/to/lib/
+    
+    In Makefile:
+    MW_HS6X_LIB = /path/to/lib/hs68_full_freertos
 
 Requirements
 ====================

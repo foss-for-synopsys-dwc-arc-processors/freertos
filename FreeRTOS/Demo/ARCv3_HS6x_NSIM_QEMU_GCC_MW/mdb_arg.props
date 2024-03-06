@@ -53,3 +53,4 @@
     -dccm_interleave
     -iccm0_size=0x80000
     -iccm0_base=0x00000000
+    -Xm128
